@@ -2,7 +2,7 @@ package _01_introduce_java.practice;
 
 import java.util.Scanner;
 
-public class _3_Operator {
+public class Th3Operator {
     public static void main(String[] args) {
         float weight;
         float height;

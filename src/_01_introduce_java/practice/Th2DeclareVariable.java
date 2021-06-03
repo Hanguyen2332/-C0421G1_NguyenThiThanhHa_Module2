@@ -1,6 +1,6 @@
 package _01_introduce_java.practice;
 
-public class _2_DeclareVariable {
+public class Th2DeclareVariable {
     public static void main(String[] args) {
         int i = 10;
         float f = 20.5f;  //tại sao phải 20.5f ??

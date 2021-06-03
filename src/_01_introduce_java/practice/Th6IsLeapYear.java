@@ -2,7 +2,7 @@ package _01_introduce_java.practice;
 
 import java.util.Scanner;
 
-public class _6_IsLeapYear {
+public class Th6IsLeapYear {
     public static void main(String[] args) {
         int year;
 

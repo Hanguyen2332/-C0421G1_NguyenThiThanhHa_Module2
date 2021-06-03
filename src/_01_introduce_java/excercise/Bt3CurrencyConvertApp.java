@@ -3,7 +3,7 @@ package _01_introduce_java.excercise;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-public class _3_CurrencyConvertApp {
+public class Bt3CurrencyConvertApp {
     public static void main(String[] args) {
         Scanner inputAmount = new Scanner(System.in);
         System.out.println("Enter USD amount: ");

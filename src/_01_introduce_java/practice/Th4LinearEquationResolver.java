@@ -3,7 +3,7 @@ package _01_introduce_java.practice;
 //Giải phương trinhg bậc nhất
 import java.util.Scanner;
 
-public class _4_LinearEquationResolver {
+public class Th4LinearEquationResolver {
     public static void main(String[] args) {
         //ax+b=c
         double a;

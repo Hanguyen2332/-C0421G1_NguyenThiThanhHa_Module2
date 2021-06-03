@@ -2,15 +2,16 @@ package _01_introduce_java.excercise;
 
 import java.util.Scanner;
 
-public class _3_ConverCurrencyToWord {
+public class Bt2ConverCurrencyToWord {
     public static void main(String[] args) {
         Scanner inputNumber = new Scanner(System.in);
         System.out.println("what is the number you want to covert? ");
         int number = inputNumber.nextInt();
         int hangTram = number / 100;
-        int hangChuc = (number % 100) / 10;  //113%100= 13/10 = 2
+        int hangChuc = (number % 100) / 10;  //113%100= 13/10 = 1  ..1
         int hangDonVi = (number % 100) % 10; //123%100 = 23%10 =3
-        int nhoHonHaiMuoi = (number % 100);
+        int nhoHonHaiMuoi = (number % 100); // 11, 12, 13  ///  113? 213? 313?
+
         if (number <= 10) {
             chuyenDoiHangDonVi(hangDonVi);
         } else if (number < 20) {
@@ -131,9 +132,9 @@ public class _3_ConverCurrencyToWord {
         System.out.print(word + " ");
     }
 
-    public static void soNhoHonHaiMuoi(int hangChuc) {
+    public static void soNhoHonHaiMuoi(int numberLessThanTwenty) {
         String word = "";
-        switch (hangChuc) {
+        switch (numberLessThanTwenty) {
             case 11:
                 word = "eleven";
                 break;

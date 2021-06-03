@@ -2,7 +2,7 @@ package _01_introduce_java.practice;
 
 import java.util.Scanner;
 
-public class _5_NumberDaysInMonth {
+public class Th5NumberDaysInMonth {
     public static void main(String[] args) {
         int month;
         Scanner inputMonth = new Scanner(System.in);
