@@ -13,7 +13,7 @@ public class Bt1RemoveElement {
             System.out.println("Enter element " + i);
             arr[i] = input.nextInt();
         }
-//        System.out.print("array: ");    //tại sao dùng print() KHÔNG được???
+//        System.out.println("array: ");    //tại sao dùng print() KHÔNG được???
 //        for (int element : arr) {
 //            System.out.print(element + " ");  //tại sao dùng print(element + " ") KHÔNG được???
 //        }
@@ -26,9 +26,14 @@ public class Bt1RemoveElement {
             if (delNum == arr[i]) {
                 check = true;
                 System.out.println("This number at index " + i);
-                for (int j = i; j < arr.length - 1; j++) {
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = 0;   // gán bằng 0, đẩy dần về cuối mảng
+                if (i == arr.length - 1) {
+                    arr[i] = 0;
+                } else {
+                    for (int j = i; j < arr.length - 1; j++) {
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = 0;   // gán bằng 0, đẩy dần về cuối mảng
+                    }
+                    i--;
                 }
             }
         }
