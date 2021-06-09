@@ -6,14 +6,12 @@ package BtAnhTrung;
 4. luyện tập Explicit casting--> in ra method "study" của các phần tử kiểu Student.
 */
 
-import java.awt.event.PaintEvent;
 import java.util.Scanner;
 
 public class StudentManagement5 {
 
     static Scanner sc = new Scanner(System.in);
     public static Person[] person;
-
     static {
         person = new Person[50];
         person[0] = new BtAnhTrung.Student(11, "Diệp", 26, "Cẩm Lệ", "C0421G1");
@@ -27,7 +25,6 @@ public class StudentManagement5 {
     public static void main(String[] args) {
 
         System.out.println("Chương trình quản lý person");
-//        _04_class_object.excercise.Student[] student = new _04_class_object.excercise.Student[50];
         do {
             System.out.println("Menu chương trình: \n" +
                     "1. Xem danh sách sinh viên\n" +
@@ -89,20 +86,24 @@ public class StudentManagement5 {
 
     //hàm 3:
     public static void deleteStudent(Person[] person) {
+        boolean check = false;
         int idDeleteStudent = Integer.parseInt(inputOutput("Nhập ID sinh viên muốn xóa: "));
         for (int i = 0; i < person.length; i++) {
             if (person[i] instanceof Student && idDeleteStudent == person[i].getId()) {
                 person[i] = null;
+                check = true;
                 break;
-            } else {
-                System.out.println("NOT found this student!");
             }
+        }
+        if (!check) {
+            System.out.println("NOT found this student!");
         }
     }
 
   //hàm 4:
     public static void editStudentInfo(Person[] person) {
         int idEditStudent = Integer.parseInt(inputOutput("Nhập ID sinh viên muốn chỉnh sửa:"));
+        boolean check = false;
         for (int i = 0; i < person.length; i++) {
             if (person[i] instanceof Student && idEditStudent == person[i].getId()) {
                 //set ID:
@@ -117,10 +118,12 @@ public class StudentManagement5 {
                 //set địa chỉ
                 String address = inputOutput("Vui lòng nhập  ĐỊA CHỈ mới: ");
                 person[i].setAddress(address);
+                check = true;
                 break;
-            } else {
-                System.out.println("NOT found this student!");
             }
+        }
+        if (!check) {
+            System.out.println("NOT found this student!");
         }
     }
 
