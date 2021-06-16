@@ -3,84 +3,88 @@ package _08_clean_code_refactoring.excercise;
 public class TennisGame {
 
     public static String getFinalScore(String player1Name, String player2Name, int player1Score, int player2Score) {
-        String finalScore = "";
-        boolean equalScore = player1Score == player2Score;
-        boolean player1ScoreLargerThanFour = player1Score >= 4;
-        boolean player2ScoreLargerThanFour = player2Score >= 4;
-        if (equalScore) {
-            finalScore = equalScore(player1Score);
-        } else if (player1ScoreLargerThanFour || player2ScoreLargerThanFour) {
-            finalScore = differentScore(player1Score, player2Score);
+        boolean isEqualScore = player1Score == player2Score;
+        boolean isAdvantage = player1Score >= 4 || player2Score >= 4;
+        if (isEqualScore) {
+            return getEqualScore(player1Score);
+        } else if (isAdvantage) {
+            return getAdvantage(player1Score, player2Score);
         } else {
-            finalScore = getDefault(player1Score, player2Score);
+            return getDefault(player1Score, player2Score);
         }
-        return finalScore;
     }
 
-    public static String equalScore(int player1Score) {
-        String finalScore = "";
+    public static String getEqualScore(int player1Score) {
+        String finalResult = "";
         switch (player1Score) {
             case 0:
-                finalScore = "Love-All";
+                finalResult = "Love-All";
                 break;
             case 1:
-                finalScore = "Fifteen-All";
+                finalResult = "Fifteen-All";
                 break;
             case 2:
-                finalScore = "Thirty-All";
+                finalResult = "Thirty-All";
                 break;
             case 3:
-                finalScore = "Forty-All";
+                finalResult = "Forty-All";
                 break;
             default:
-                finalScore = "Deuce";
+                finalResult = "Deuce";
                 break;
 
         }
-        return finalScore;
+        return finalResult;
     }
 
-    public static String differentScore(int player1Score, int player2Score) {
-        String finalScore = "";
+    public static String getAdvantage(int player1Score, int player2Score) {
+        String finalResult = "";
         int differentScore = player1Score - player2Score;
+
         if (differentScore == 1) {
-            finalScore = "Advantage player1";
+            finalResult = "Advantage player1";
         } else if (differentScore == -1) {
-            finalScore = "Advantage player2";
+            finalResult = "Advantage player2";
         } else if (differentScore >= 2) {
-            finalScore = "Win for player1";
+            finalResult = "Win for player1";
         } else {
-            finalScore = "Win for player2";
+            finalResult = "Win for player2";
         }
-        return finalScore;
+        return finalResult;
     }
 
     public static String getDefault(int player1Score, int player2Score) {
-        String finalScore = "";
-        String subtraction  = "-";
-        int tempScore;
+        String finalResult = "";
+        int tempScore = 0;
         for (int i = 1; i < 3; i++) {
             if (i == 1) {
                 tempScore = player1Score;
             } else {
-                finalScore+= (subtraction);
+                finalResult += "-";
                 tempScore = player2Score;
             }
-            switch (tempScore) {
-                case 0:
-                    finalScore+=("Love");
-                    break;
-                case 1:
-                    finalScore+=("Fifteen");
-                    break;
-                case 2:
-                    finalScore+=("Thirty");
-                    break;
-                case 3:
-                    finalScore+=("Forty");
-                    break;
-            }
+            finalResult += checkTempScore(tempScore);
         }
-        return finalScore;
+        return finalResult;
+    }
+
+    public static String checkTempScore(int tempScore) {
+        String finalResult = "";
+        switch (tempScore) {
+            case 0:
+                finalResult += ("Love");
+                break;
+            case 1:
+                finalResult += ("Fifteen");
+                break;
+            case 2:
+                finalResult += ("Thirty");
+                break;
+            case 3:
+                finalResult += ("Forty");
+                break;
+        }
+        return finalResult;
     }
 }
+
