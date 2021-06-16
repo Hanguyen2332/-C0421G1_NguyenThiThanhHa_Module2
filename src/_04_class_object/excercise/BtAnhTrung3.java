@@ -2,61 +2,6 @@ package _04_class_object.excercise;
 
 import java.util.Scanner;
 
-class Student {
-    private int id;
-    private String name;
-    private int age;
-    private String address;
-
-    public Student() {
-    }
-
-    public Student(int id, String name, int age, String address) {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int newId) {
-        this.id = newId;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String newName) {
-        this.name = newName;
-    }
-
-    public int getAge() {
-        return this.age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(String newAddress) {
-        this.address = newAddress;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", address='" + address + '\'' +
-                '}';
-    }
-}
-
 public class BtAnhTrung3 {
 
     static Scanner sc = new Scanner(System.in);
@@ -110,9 +55,9 @@ public class BtAnhTrung3 {
 
     //hàm 2:
     public static void deleteStudent(Student[] student) {
-        int deleteStudent = Integer.parseInt(inputOutput("Nhập ID sinh viên muốn xóa: "));
+        int idDeleteStudent = Integer.parseInt(inputOutput("Nhập ID sinh viên muốn xóa: "));
         for (int i = 0; i < student.length; i++) {
-            if (deleteStudent == (student[i].getId())) {  //tại sao bài anh Trung: deleteStudent.equals(student[i])--> vần chạy đc Không lỗi??
+            if (idDeleteStudent == (student[i].getId())) {  //tại sao bài anh Trung: deleteStudent.equals(student[i])--> vần chạy đc Không lỗi??
                 student[i] = null;
                 break;
             }
@@ -134,8 +79,8 @@ public class BtAnhTrung3 {
                 student[i].setName(name);
                 //set tuổi
                 System.out.println("Vui lòng nhập TUỔI mới: ");
-                int age = sc.nextInt();
-                student[i].setAge(age);
+                int age = Integer.parseInt(sc.nextLine());   // NOTE: Lệnh sc.nextLine(): nếu đặt SAU sc.nextInt()--> sẽ bị lỗi KHÔNG HIỂN THỊ
+                student[i].setAge(age);                     //FIX: sửa thành: Integer.parseInt(sc.nextLine())
                 //set địa chỉ
                 System.out.println("Vui lòng nhập ĐỊA CHỈ mới: ");
                 String address = sc.nextLine();
@@ -152,9 +97,9 @@ public class BtAnhTrung3 {
         System.out.println("Vui lòng nhập TÊN sinh viên mới: ");
         String name = sc.nextLine();
         System.out.println("Vui lòng nhập TUỔI sinh viên mới: ");
-        int age = sc.nextInt();
+        int age = Integer.parseInt(sc.nextLine());
         System.out.println("Vui lòng nhập ĐỊA CHỈ sinh viên mới: ");
-        String address = sc.nextLine();     //TẠI SAO khi Runtime lại mất dòng này?
+        String address = sc.nextLine();                             //TẠI SAO khi Runtime lại mất dòng này?
         Student newStudent = new Student(id, name, age, address);
         for (int i = 0; i < student.length; i++) {
             if ((student[i] == null)) {
