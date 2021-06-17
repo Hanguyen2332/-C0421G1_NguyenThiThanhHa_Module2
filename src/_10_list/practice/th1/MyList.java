@@ -2,7 +2,7 @@ package _10_list.practice.th1;
 
 import java.util.Arrays;
 
-public class MyList<E> {   //E: THAM SỐ HÓA kiểu dữ liệu (generic) --> M: tái sử dụng code, khi chạy chương trình, ưng truyền kiểu dữ liệu gì vào cg ok!
+ class MyList<E> {   //E: THAM SỐ HÓA kiểu dữ liệu (generic) --> M: tái sử dụng code, khi chạy chương trình, ưng truyền kiểu dữ liệu gì vào cg ok!
     private int size;
     private final int DEFAULT_CAPACITY = 10;
     private Object []elements;

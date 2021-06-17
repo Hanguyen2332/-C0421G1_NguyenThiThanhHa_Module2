@@ -10,6 +10,7 @@ public class MyLinkedListTest {
 
         linkedList.add(4,9);
         linkedList.add(4,9);
+        System.out.println(linkedList.get(2));
         linkedList.printList();
     }
 }
