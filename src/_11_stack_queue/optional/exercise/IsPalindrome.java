@@ -1,28 +1,31 @@
-package _11_stack_queue.optional.isPalindrome;
+package _11_stack_queue.optional.exercise;
 
 import sun.misc.Queue;
 
-import java.util.Arrays;
 import java.util.Stack;
 
-public class IsPalindrome {
+public class IsPalindrome  {
     public static void main(String[] args) throws InterruptedException {
         String str = "Able was I ere I saw Elba";
-        String[] arr = str.split("");
-        System.out.println(Arrays.toString(arr));
+        isPalindrome(str);
+    }
+
+    public static void isPalindrome(String str) throws InterruptedException {
         //Khởi tạo Stack, add arr[i] vào stack:
-        Stack<String> stack = new Stack<String>();
-        for (String value : arr) {
-            stack.push(value.toUpperCase());
-        }
+        Stack<Character> stack = new Stack<Character>();
         //Khởi tạo Queue, add arr[i] vào Queue:
-        Queue<String> queue = new Queue<String>();
-        for (String value : arr) {
-            queue.enqueue(value.toUpperCase());
+        Queue<Character> queue = new Queue<Character>();
+        for (int i = 0; i < str.length(); i++) {
+            stack.push(str.toUpperCase().charAt(i));
+            queue.enqueue(str.toUpperCase().charAt(i));
         }
+        compareStackAndQueue(stack, queue, str);
+    }
+
+    public static void compareStackAndQueue(Stack<Character> stack, Queue<Character> queue, String str) throws InterruptedException {
         //so sánh từng cặp element của Queue-Stack:
         boolean check = false;
-        for (int i = 0; i < arr.length/2; i++) {
+        for (int i = 0; i < str.length() / 2; i++) {
             if (stack.pop().equals(queue.dequeue())) {
                 check = true;
             } else {
