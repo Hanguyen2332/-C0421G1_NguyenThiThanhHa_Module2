@@ -2,7 +2,7 @@ package _11_stack_queue.excercise.bt2;
 
 public class TestQueue {
     public static void main(String[] args) throws Exception {
-        QueueDoubleLinkedList myQueue =  new QueueDoubleLinkedList();
+        CircularLinkedList myQueue =  new CircularLinkedList();
         //test enQueue(): ok
         myQueue.enQueue(12);
         myQueue.enQueue(13);

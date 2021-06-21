@@ -1,4 +1,4 @@
-package _11_stack_queue.practice.th4;
+package _11_stack_queue.optional.practice4;
 
 class MyStack<T> {
     private int[] arr;
@@ -46,4 +46,4 @@ class MyStack<T> {
         return false;
     }
 }
-//túm lại: khi pop, chỉ cần giảm top xuống 1 đơn vị là được, không cần gán giá trị tại ô nhớ đó = 0 à? (mảng Interger)
+//túm lại: khi pop, chỉ cần giảm top xuống 1 đơn vị là được, không cần gán giá trị tại ô nhớ đó = 0/null.

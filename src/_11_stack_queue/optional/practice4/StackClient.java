@@ -1,4 +1,4 @@
-package _11_stack_queue.practice.th4;
+package _11_stack_queue.optional.practice4;
 
 public class StackClient {
     public static void main(String[] args) throws Exception {
