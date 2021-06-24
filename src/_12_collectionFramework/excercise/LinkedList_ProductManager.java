@@ -6,37 +6,56 @@ public class LinkedList_ProductManager {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-//            Product product1 = new Product(1,"Cơm gà",25);
-//            Product product2 = new Product(2,"Mì gà",20);
-//            Product product3 = new Product(3,"Đậu hũ lướt ván",22.5);
-//            Product product4 = new Product(4,"Bò nó 3 ngon",70);
         List<Product> products = new LinkedList<>();
-//        //Gọi hàm thêm
-        addProduct(products);
-        addProduct(products);
-        addProduct(products);
-//        //gọi hàm display:
-        displayProducts(products);
-        //gọi hàm sủa:
-        editProduct(products);
-        displayProducts(products);
-        //gọi hàm xóa:
-        removeProduct(products);
-        //gọi hàm display:
-        displayProducts(products);
-        //gọi hàm search():
-        System.out.println(searchByName(products));
-        //thêm
-        System.out.println("Thêm mới: ");
-        addProduct(products);
-        //sắp xếp:
-        sortByPrice(products);
+        do {
+            System.out.println("Menu: \n" +
+                    "1. Add new Product\n" +
+                    "2. Edit Product \n" +
+                    "3. Remove Product\n" +
+                    "4. Display Product\n" +
+                    "5. Search Product by Name\n" +
+                    "6. Sorting Procduct by price\n" +
+                    "7. Exit\n" +
+                    "Please enter your choice:");
+            int choice = Integer.parseInt(sc.nextLine());
+            switch (choice) {
+                case 1:
+                    addProduct(products);
+                    break;
+                case 2:
+                    editProduct(products);
+                    break;
+                case 3:
+                    removeProduct(products);
+                    break;
+                case 4:
+                    displayProducts(products);
+                    break;
+                case 5:
+                    searchByName(products);
+                    break;
+                case 6:
+                    sortByPrice(products);
+                    break;
+                case 7:
+                    System.exit(0);
+                default:
+                    System.out.println("The number you entered is not valid. Please choose again: ");
+            }
+        } while (true);
     }
 
     public static void addProduct(List<Product> products) {
-        int id = Integer.parseInt(inputOutput("input new product's id:"));
-        String name = inputOutput("input new product's name:");
-        double price = Double.parseDouble(inputOutput("input new product's price: "));
+        int id = Integer.parseInt(inputOutput("input ID:"));
+        for (int i = 0; i < products.size(); i++) {
+            //kiểm tra, không cho nhập ID trùng lặp
+            if (products.get(i).getId() == id) {
+                System.out.println("ID cannot be duplicated! Please enter again: ");
+                id = Integer.parseInt(inputOutput("input ID:"));
+            }
+        }
+        String name = inputOutput("input product's name:");
+        double price = Double.parseDouble(inputOutput("input price: "));
         Product product = new Product(id, name, price);
         products.add(product);
         System.out.println("add new element successfully");
@@ -48,11 +67,10 @@ public class LinkedList_ProductManager {
         for (int i = 0; i < products.size(); i++) {
             if (id == products.get(i).getId()) {
                 check = true;
-                int newId = Integer.parseInt(inputOutput("input new ID"));
                 String newName = inputOutput("input product's name:");
+                products.get(i).setName(newName);
                 double newPrice = Double.parseDouble(inputOutput("input price: "));
-                Product product = new Product(newId, newName, newPrice);
-                products.set(i, product);
+                products.get(i).setPrice(newPrice);
                 break;
             }
         }
@@ -87,13 +105,13 @@ public class LinkedList_ProductManager {
     }
 
     //hàm tìm tên theo sản phẩm:
-    public static Product searchByName(List<Product> products) {
+    public static void searchByName(List<Product> products) {
         String nameProduct = inputOutput("input name of product you wanna search: ");
         Map<String, Product> map = new HashMap<>();
         for (int i = 0; i < products.size(); i++) {
             map.put(products.get(i).getName(), products.get(i));
         }
-        return map.get(nameProduct);
+        System.out.println(map.get(nameProduct));
     }
     //hàm sắp xếp sản phẩm theo giá:
 
