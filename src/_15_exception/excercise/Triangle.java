@@ -18,22 +18,28 @@ public class Triangle {
                 throw new IllegalTriangleException("The sum of any two sides must be GREATER than the other side ");
             }
         } else {
-            throw new IllegalTriangleException("side of triangle must be greater than 0");
+            throw new IllegalTriangleException("Side of triangle must be GREATER than 0");
         }
     }
 
     public static void main(String[] args) {
+        boolean check = false;
         Scanner sc = new Scanner(System.in);
-        System.out.println("enter side a: ");
-        float a = sc.nextFloat();
-        System.out.println("enter side b: ");
-        float b = sc.nextFloat();
-        System.out.println("enter side c: ");
-        float c = sc.nextFloat();
-        try {
-            Triangle myTriangle = new Triangle(a, b, c);
-        } catch (IllegalTriangleException e) {
-            e.printStackTrace();
+
+        while (!check) {
+            System.out.println("enter side a: ");
+            float a = sc.nextFloat();
+            System.out.println("enter side b: ");
+            float b = sc.nextFloat();
+            System.out.println("enter side c: ");
+            float c = sc.nextFloat();
+            try {
+                Triangle myTriangle  = new Triangle(a,b,c);
+                check = true;
+            } catch (IllegalTriangleException ex) {
+//            e.printStackTrace();                  //In ra dấu vết chính xác của ngoại lệ: xảy ra ở dòng nào --> in toàn bộ dấu vết của nó.
+                System.err.println("Exception: " + ex + ". Please try again: ");  //In ngoại lệ đã xảy ra
+            }
         }
     }
 }
