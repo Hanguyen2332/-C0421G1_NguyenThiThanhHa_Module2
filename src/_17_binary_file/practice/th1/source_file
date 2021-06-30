@@ -1,0 +1,9 @@
+public static void copyFile(String sourcePath, String desPath) {
+        InputStream fileInputStream = null;
+        OutputStream fileOutputStream = null;
+        try {
+//            check isExist;
+            File sourFile = new File(sourcePath);
+            File desFile = new File(desPath);
+            if (!sourFile.exists() || !desFile.exists()) {
+                throw new FileNotFoundException();
