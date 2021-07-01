@@ -1,0 +1,13 @@
+lic class ReadAndWrite {
+    static Scanner sc = new Scanner(System.in);
+
+    //hàm write:
+    public void writeToFile(File file, List<Product> products) {
+        ObjectOutputStream oops = null;
+        try {
+            if (!file.exists()) {
+                System.out.println("file is NOT exist! Create new file");
+                file.createNewFile();
+            }
+            oops = new ObjectOutputStream(new FileOutputStream(file));
+            oops.writeObject(products); // Ghi list đ

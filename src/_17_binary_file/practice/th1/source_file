@@ -1,9 +1,13 @@
-public static void copyFile(String sourcePath, String desPath) {
-        InputStream fileInputStream = null;
-        OutputStream fileOutputStream = null;
+lic class ReadAndWrite {
+    static Scanner sc = new Scanner(System.in);
+
+    //hàm write:
+    public void writeToFile(File file, List<Product> products) {
+        ObjectOutputStream oops = null;
         try {
-//            check isExist;
-            File sourFile = new File(sourcePath);
-            File desFile = new File(desPath);
-            if (!sourFile.exists() || !desFile.exists()) {
-                throw new FileNotFoundException();
+            if (!file.exists()) {
+                System.out.println("file is NOT exist! Create new file");
+                file.createNewFile();
+            }
+            oops = new ObjectOutputStream(new FileOutputStream(file));
+            oops.writeObject(products); // Ghi list đ
