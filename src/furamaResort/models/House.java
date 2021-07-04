@@ -1,29 +1,29 @@
 package furamaResort.models;
 
 public class House extends Facility {
-    private String roomStandard;
+    private String standard;
     private int floors;
 
     public House() {
     }
 
-    public House(String roomStandard, int floors) {
-        this.roomStandard = roomStandard;
+    public House(String standard, int floors) {
+        this.standard = standard;
         this.floors = floors;
     }
 
-    public House(String utilName, float useArea, float rentalFees, int maxNumsPeople, String rentalType, String roomStandard, int floors) {
-        super(utilName, useArea, rentalFees, maxNumsPeople, rentalType);
-        this.roomStandard = roomStandard;
+    public House(String serviceCode, float useArea, double rentalFees, int maxNumsPeople, String rentalType, String standard, int floors) {
+        super(serviceCode, useArea, rentalFees, maxNumsPeople, rentalType);
+        this.standard = standard;
         this.floors = floors;
     }
 
-    public String getRoomStandard() {
-        return roomStandard;
+    public String getStandard() {
+        return standard;
     }
 
-    public void setRoomStandard(String roomStandard) {
-        this.roomStandard = roomStandard;
+    public void setStandard(String standard) {
+        this.standard = standard;
     }
 
     public int getFloors() {
@@ -37,7 +37,7 @@ public class House extends Facility {
     @Override
     public String toString() {
         return "House{" +
-                "roomStandard='" + roomStandard + '\'' +
+                "roomStandard='" + standard + '\'' +
                 ", floors=" + floors +
                 '}';
     }

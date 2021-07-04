@@ -1,32 +1,35 @@
 package furamaResort.models;
 
+import java.io.Serializable;
+
 public class Villa extends Facility {
-    private String roomStandard;
+    private String standard;  // đơn lập, song lập, liền kề ?
     private float poolArea;
     private int floors;
 
     public Villa() {
     }
 
-    public Villa(String roomStandard, float poolArea, int floors) {
-        this.roomStandard = roomStandard;
+    public Villa(String standard, float poolArea, int floors) {
+        this.standard = standard;// tiêu chuẩn phòng
         this.poolArea = poolArea;
         this.floors = floors;
     }
 
-    public Villa(String utilName, float useArea, float rentalFees, int maxNumsPeople, String rentalType, String roomStandard, float poolArea, int floors) {
-        super(utilName, useArea, rentalFees, maxNumsPeople, rentalType);
-        this.roomStandard = roomStandard;
+    public Villa(String serviceCode, float useArea, double rentalFees, int maxNumsPeople, String rentalType, String standard, float poolArea, int floors) {
+        super(serviceCode, useArea, rentalFees, maxNumsPeople, rentalType);
+        this.standard = standard;
         this.poolArea = poolArea;
         this.floors = floors;
     }
 
-    public String getRoomStandard() {
-        return roomStandard;
+
+    public String getStandard() {
+        return standard;
     }
 
-    public void setRoomStandard(String roomStandard) {
-        this.roomStandard = roomStandard;
+    public void setStandard(String standard) {
+        this.standard = standard;
     }
 
     public float getPoolArea() {
@@ -48,7 +51,7 @@ public class Villa extends Facility {
     @Override
     public String toString() {
         return "Villa{" +
-                "roomStandard='" + roomStandard + '\'' +
+                "roomStandard='" + standard + '\'' +
                 ", poolArea=" + poolArea +
                 ", floors=" + floors +
                 '}';

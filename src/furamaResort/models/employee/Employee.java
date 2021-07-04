@@ -2,6 +2,7 @@ package furamaResort.models.employee;
 
 import furamaResort.models.Person;
 
+import java.io.Serializable;
 import java.util.Date;
 
 public class Employee extends Person {

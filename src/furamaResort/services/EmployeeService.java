@@ -6,5 +6,4 @@ public interface EmployeeService extends Service {
 
     void edit();
 
-    String checkInputProperty(String[] arr);
 }

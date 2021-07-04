@@ -1,6 +1,8 @@
 package furamaResort.models.employee;
 
-public class AcademicLevel {
+import java.io.Serializable;
+
+public class AcademicLevel implements Serializable {
     private String levelName;
 
     public AcademicLevel(String levelName) {

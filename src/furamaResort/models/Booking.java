@@ -1,11 +1,12 @@
 package furamaResort.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Booking {
+public class Booking implements Serializable, Comparable<Booking> {
     private String bookingId;
-    private Date startDay;
-    private Date endDay;
+    private String startDay;
+    private String endDay;
     private String customerId;
     private String serviceName;
     private String serviceType;  //???? loại dịch vụ là gì?
@@ -13,7 +14,7 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(String bookingId, Date startDay, Date endDay, String customerId, String serviceName, String serviceType) {
+    public Booking(String bookingId, String startDay, String endDay, String customerId, String serviceName, String serviceType) {
         this.bookingId = bookingId;
         this.startDay = startDay;
         this.endDay = endDay;
@@ -30,19 +31,19 @@ public class Booking {
         this.bookingId = bookingId;
     }
 
-    public Date getStartDay() {
+    public String getStartDay() {
         return startDay;
     }
 
-    public void setStartDay(Date startDay) {
+    public void setStartDay(String startDay) {
         this.startDay = startDay;
     }
 
-    public Date getEndDay() {
+    public String getEndDay() {
         return endDay;
     }
 
-    public void setEndDay(Date endDay) {
+    public void setEndDay(String endDay) {
         this.endDay = endDay;
     }
 
@@ -80,5 +81,10 @@ public class Booking {
                 ", serviceName='" + serviceName + '\'' +
                 ", serviceType='" + serviceType + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Booking o) {
+        return 0;
     }
 }

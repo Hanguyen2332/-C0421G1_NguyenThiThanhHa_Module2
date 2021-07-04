@@ -1,29 +1,31 @@
 package furamaResort.models;
 
-public abstract class Facility {
-    private String utilName;
+import java.io.Serializable;
+
+public abstract class Facility implements Serializable {
+    private String serviceCode;
     private float useArea;
-    private float rentalFees;
+    private double rentalFees;
     private int maxNumsPeople;
     private String rentalType;
 
     public Facility() {
     }
 
-    public Facility(String utilName, float useArea, float rentalFees, int maxNumsPeople, String rentalType) {
-        this.utilName = utilName;
+    public Facility(String serviceCode, float useArea, double rentalFees, int maxNumsPeople, String rentalType) {
+        this.serviceCode = serviceCode;
         this.useArea = useArea;
         this.rentalFees = rentalFees;
         this.maxNumsPeople = maxNumsPeople;
         this.rentalType = rentalType;
     }
 
-    public String getUtilName() {
-        return utilName;
+    public String getServiceCode() {
+        return serviceCode;
     }
 
-    public void setUtilName(String utilName) {
-        this.utilName = utilName;
+    public void setServiceCode(String serviceCode) {
+        this.serviceCode = serviceCode;
     }
 
     public float getUseArea() {
@@ -34,11 +36,11 @@ public abstract class Facility {
         this.useArea = useArea;
     }
 
-    public float getRentalFees() {
+    public double getRentalFees() {
         return rentalFees;
     }
 
-    public void setRentalFees(float rentalFees) {
+    public void setRentalFees(double rentalFees) {
         this.rentalFees = rentalFees;
     }
 
@@ -61,7 +63,7 @@ public abstract class Facility {
     @Override
     public String toString() {
         return "Facility{" +
-                "utilName='" + utilName + '\'' +
+                "utilName='" + serviceCode + '\'' +
                 ", useArea=" + useArea +
                 ", rentalFees=" + rentalFees +
                 ", maxNumsPeople=" + maxNumsPeople +

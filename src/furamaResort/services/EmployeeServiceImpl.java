@@ -1,46 +1,53 @@
 package furamaResort.services;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+
+import furamaResort.libs.CheckProperty;
+import furamaResort.libs.CheckValid;
+import furamaResort.libs.QuickInOut;
 import furamaResort.models.employee.AcademicLevel;
 import furamaResort.models.employee.Employee;
+import furamaResort.utils.ReadAndWrite;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.io.File;
+import java.util.*;
 
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmployeeServiceImpl extends CheckProperty implements EmployeeService {
     static Scanner sc = new Scanner(System.in);
+    //field property
     String[] qualification = {"Trung cấp", "Cao đẳng", "Đại học", "Sau đại học"};
     String[] positions = {"Lễ tân", "phục vụ", "chuyên viên", "giám sát", "quản lý", "giám đốc"};
-
-    static List<Employee> employees = new ArrayList<>();  // khởi tạo list nhân viên
-
+    //Tạo file
+    static ReadAndWrite<Employee> employeeFile = new ReadAndWrite<>();
+    static final String PATH_FILE = "D:\\module2\\src\\furamaResort\\data\\employee";
+    static File file = new File(PATH_FILE);
+    //1. khởi tạo list Employee: rỗng
+    static Collection<Employee> employeeList = new ArrayList<>();    //sửa: List<T> --> Collection<T>
+    //2. khởi tạo giá trị list từ file:
     static {
-        employees.add(new Employee("FRM111", "Đồng Văn Nhật", "2/3/1997", "nữ", "11223344",
-                "0949123145", "nhatvd@gmail.com", new AcademicLevel("Đại học"), "chuyên viên", 10));
-        employees.add(new Employee("FRM222", "Đồng Văn Tài", "12/3/1995", "nữ", "12345567",
-                "0393533666", "taivd@gmail.com", new AcademicLevel("Cao đẳng"), "quản lý", 13));
-        employees.add(new Employee("FRM333", "Đồng Văn Phục", "12/3/2002", "phi giới tính", "3993572",
-                "0310666777", "phucvd@gmail.com", new AcademicLevel("Trung cấp"), "phục vụ", 8));
+        employeeList = employeeFile.readData(file);
+    }
+
+    public static Collection<Employee> readFileData() {  //cho chạy trc tiên --> khởi tạo dữ liệu,  //sửa: List<T> --> Collection<T>
+        return employeeFile.readData(file);
     }
 
     @Override
-    public void display() {
-        for (Employee employee : employees) {
+    public void display() {  //ok
+        // báo file rỗng: đã xử lý tại class ReadAndWrite: --> catch EOFEEx
+        for (Employee employee : employeeList) {
             System.out.println(employee);
         }
     }
 
     @Override
-    public void addNew() {
-        String id = inputOutput("Enter employee code : ");
-        String name = inputOutput("Enter employee's full name: ");
-        String dateOfBirth = inputOutput("Enter date Of Birth: ");
-        String gender = inputOutput("Enter gender: ");
-        String idNumber = inputOutput("Enter ID Number: ");
-        String phone = inputOutput("Enter phone number: ");
-        String email = inputOutput("Enter email: ");
+    public void addNew() {  // đã update: thêm mới vào file IO  -ok
+        String id = QuickInOut.inputOutput("Enter employee code : ");
+        String name = QuickInOut.inputOutput("Enter employee's full name: ");
+        String dateOfBirth = QuickInOut.inputOutput("Enter date Of Birth: ");
+        String gender = QuickInOut.inputOutput("Enter gender: ");
+        String idNumber = QuickInOut.inputOutput("Enter ID Number: ");
+        String phone = QuickInOut.inputOutput("Enter phone number: ");
+        String email = QuickInOut.inputOutput("Enter email: ");
         //nhap hoc van:
         System.out.println("Enter education: ");
         AcademicLevel newLevel = new AcademicLevel(checkInputProperty(qualification)); //mảng qualification: đã khai báo ở đầu class --> tái sử dụng ở hàm edit
@@ -48,93 +55,43 @@ public class EmployeeServiceImpl implements EmployeeService {
         System.out.println("Enter position: ");
         String position = checkInputProperty(positions);
         //lương:
-        float salary = Float.parseFloat(inputOutput("Enter salary: "));
+        System.out.println("Enter salary: ");
+        float salary = CheckValid.checkFloatException();
         //add new:
-        employees.add(new Employee(id, name, dateOfBirth, gender, idNumber, phone, email, newLevel, position, salary));
+        employeeList.add(new Employee(id, name, dateOfBirth, gender, idNumber, phone, email, newLevel, position, salary));
+        employeeFile.writeData(PATH_FILE, employeeList);  //3. add new vào list--> ghi đè trở lại vào file --> update data
     }
 
     @Override
-    public void edit() {
+    public void edit() {   //ok - update: try/catch, cho loop --> nhập id + choice đến khi đúng
         boolean check = false;
-        String employeeNumber = inputOutput("Please enter ID: ");
-        for (Employee employee : employees) {
-            if (employeeNumber.equals(employee.getCode())) {
-                check = true;
-                boolean runLoop = true;  // biến runloop: đk chạy - dừng vòng lặp
-                do {
-                    System.out.println("Property list: \n 1. FullName\n 2. dateOfBirth\n 3. gender\n 4. idNumber\n 5. phoneNumber\n " +
-                            "6. email\n 7. qualification \n 8. position\n 9. salary\n  0. Exit\n" +
-                            "Please select the item you want to edit: ");
-                    int choice = Integer.parseInt(sc.nextLine());
-                    switch (choice) {
-                        case 1:
-                            employee.setFullName(inputOutput("Enter new Name:"));
-                            break;
-                        case 2:
-                            employee.setDateOfBirth(inputOutput("Enter new Name:"));
-                            break;
-                        case 3:
-                            employee.setGender(inputOutput("Enter new gender:"));
-                            break;
-                        case 4:
-                            employee.setIdNumber(inputOutput("Enter new idNumber:"));
-                            break;
-                        case 5:
-                            employee.setPhoneNumber(inputOutput("Enter new phoneNumber:"));
-                            break;
-                        case 6:
-                            employee.setEmail(inputOutput("Enter new email:"));
-                            break;
-                        case 7:
-                            AcademicLevel newLevel = new AcademicLevel(checkInputProperty(qualification));
-                           employee.setAcademicLevel(newLevel);
-                            break;
-                        case 8:
-                            String position = checkInputProperty(positions);
-                            employee.setPosition(position);
-                            break;
-                        case 9:
-                            employee.setSalary(Float.parseFloat(inputOutput("Enter new salary:")));
-                            break;
-                        case 0:
-                            runLoop = false;  //ĐK dừng loop
-                            break;
-                        default:
-                            System.err.println("your enter is mismatch. please try again.");
-                    }
-                } while (runLoop);
-            }
-        }
-        if (!check) {
-            System.err.println("NOT found this employee-number!");
-        }
-    }
-
-    @Override
-    public String checkInputProperty(String[] arr) {
-        System.out.println("There are " + arr.length + " options: " + Arrays.toString(arr));
-        String input;
-        boolean check = false;
-        do {
-            input = inputOutput("Enter one of them: ");
-            for (String e : arr) {
-                if ((input.toUpperCase().equals(e.toUpperCase()))) {
-                    input = e;
+        while (!check) {
+            String employeeNumber = QuickInOut.inputOutput("Please enter employee's ID : ");
+            //lấy data từ file
+            for (Employee employee : employeeList) {
+                if (employeeNumber.equals(employee.getCode())) {
                     check = true;
-                    break;
+                    employee.setFullName(QuickInOut.inputOutput("Enter new Name:"));
+                    employee.setDateOfBirth(QuickInOut.inputOutput("Enter new date of birth:"));
+                    employee.setGender(QuickInOut.inputOutput("Enter new gender:"));
+                    employee.setIdNumber(QuickInOut.inputOutput("Enter new idNumber:"));
+                    employee.setPhoneNumber(QuickInOut.inputOutput("Enter new phoneNumber:"));
+                    employee.setEmail(QuickInOut.inputOutput("Enter new email:"));
+                    AcademicLevel newLevel = new AcademicLevel(checkInputProperty(qualification));
+                    employee.setAcademicLevel(newLevel);
+                    String position = checkInputProperty(positions);
+                    employee.setPosition(position);
+                    System.out.println("Enter new salary:");
+                    employee.setSalary(CheckValid.checkFloatException());
+                    employeeFile.writeData(PATH_FILE, employeeList);
                 }
             }
             if (!check) {
-                System.err.println("your enter is NOT match! please try again! ");
+                System.err.println("NOT found this employee-number! Please try again");
             }
-        } while (!check);
-        return input;
-    }
-
-    public static String inputOutput(String massage) {
-        System.out.println(massage);
-        return sc.nextLine();
+        }
     }
 }
-
-
+//chỉnh sửa: cho extends class checkInputProperty  --> tái sử dụng code
+//add - display(): UPDATE : Lưu list nhân viên = file IO: OK
+//hàm edit():  ok . Update: try/catch, cho loop --> nhập id + chooise đến khi đúng

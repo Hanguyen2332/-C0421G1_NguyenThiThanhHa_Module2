@@ -1,7 +1,8 @@
 package furamaResort.models;
 
 public class Room extends Facility {
-    private String freeServices;
+    private String freeServices; //Quầy bar/Cafe/Dịch vụ Spa/Dịch vụ phòng họp/Dịch vụ giặt, ủi/Dịch vụ phòng 24/24/
+    // Dịch vụ xe đưa đón sân bay/Sân golf và sân tennis/Fitness centre/Dịch vụ bể bơi 4 mùa/Thu đổi ngoại tệ....
 
     public Room() {
     }
@@ -10,8 +11,8 @@ public class Room extends Facility {
         this.freeServices = freeServices;
     }
 
-    public Room(String utilName, float useArea, float rentalFees, int maxNumsPeople, String rentalType, String freeServices) {
-        super(utilName, useArea, rentalFees, maxNumsPeople, rentalType);
+    public Room(String serviceCode, float useArea, double rentalFees, int maxNumsPeople, String rentalType, String freeServices) {
+        super(serviceCode, useArea, rentalFees, maxNumsPeople, rentalType);
         this.freeServices = freeServices;
     }
 

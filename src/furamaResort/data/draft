@@ -1,0 +1,29 @@
+        employees.add(new Employee("FRM111", "Đồng Văn Nhật", "2/3/1997", "nữ", "11223344",
+                "0949123145", "nhatvd@gmail.com", new AcademicLevel("Đại học"), "chuyên viên", 10));
+        employees.add(new Employee("FRM222", "Đồng Văn Tài", "12/3/1995", "nữ", "12345567",
+                "0393533666", "taivd@gmail.com", new AcademicLevel("Cao đẳng"), "quản lý", 13));
+        employees.add(new Employee("FRM333", "Đồng Văn Phục", "12/3/2002", "phi giới tính", "3993572",
+                "0310666777", "phucvd@gmail.com", new AcademicLevel("Trung cấp"), "phục vụ", 8));
+
+
+    List Facility:
+//    static {
+//        villaMap.put(new Villa("SVVL-1234", 40.1f, 177,2,
+//                "SVVL-day", "SVVL-see garden", 30f, 1), 0);
+//        houseMap.put(new House("SVHO-4141", 120f, 200, 4,
+//                "SVHO-month", "SVHO-sea view", 2), 0);
+//        roomMap.put(new Room("SVRO-5151", 35.5f, 120, 1,
+//                "SVRO-day", "Quầy bar/Cafe/Spa/Giặt ủi"), 0);
+//    }
+    public static void main(String[] args) {
+//        villaFile.writeData(PATH_VILLA, villaMap);
+//        houseFile.writeData(PATH_HOUSE, houseMap);
+//        roomFile.writeData(PATH_ROOM, roomMap);
+
+        FacilityServiceImpl facility = new FacilityServiceImpl();
+        facility.display();
+    }
+
+
+
+

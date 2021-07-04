@@ -1,8 +1,9 @@
 package furamaResort.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public abstract class Person {
+public abstract class Person implements Serializable {
     private String code;
     private String fullName;
     private String dateOfBirth;
