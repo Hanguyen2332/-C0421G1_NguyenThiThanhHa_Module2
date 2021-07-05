@@ -1,9 +1,12 @@
 package furamaResort.controllers;
 
+import furamaResort.services.BookingServiceIplm;
+
 import java.util.Scanner;
 
 public class BookingController {
     static Scanner sc = new Scanner(System.in);
+    private static BookingServiceIplm bookingServiceIplm = new BookingServiceIplm();
 
     public static void bookingMenu() {
         System.out.println("1.  Display list booking\n" +
@@ -17,9 +20,11 @@ public class BookingController {
         switch (case_choice4) {
             case 1:
                 //goi ham ADD booking
+                bookingServiceIplm.display();
                 break;
             case 2:
                 //goi ham DISPLAY booking
+                bookingServiceIplm.addBooking();
                 break;
             case 3:
                 //goi ham CREATE contracts

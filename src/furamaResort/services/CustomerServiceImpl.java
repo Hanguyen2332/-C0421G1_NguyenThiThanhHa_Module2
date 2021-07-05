@@ -17,12 +17,12 @@ public class CustomerServiceImpl implements CustomerService {
     private static Scanner sc = new Scanner(System.in);
     private String[] customerType = {"Diamond", "Platinum", "Gold", "Silver", "Member"}; //tại sao biến mảng: không cần static--> vẫn gọi đc trong hàm?
     //file
-    private static ReadAndWrite<Customer> customerFile = new ReadAndWrite<>();
-    private static final String PATH_FILE = "D:\\module2\\src\\furamaResort\\data\\customer";
-    private static File file = new File(PATH_FILE);
+    public static ReadAndWrite<Customer> customerFile = new ReadAndWrite<>();
+    private static final String PATH_CUSTOMER = "D:\\module2\\src\\furamaResort\\data\\customer";
+    private static File file = new File(PATH_CUSTOMER);
     //list:
     private static Collection<Customer> customerList = new LinkedList<>();  //sửa: List<T> --> Collection<T>
-    static {
+     static {
         customerList = customerFile.readData(file);
     }
 
@@ -49,7 +49,7 @@ public class CustomerServiceImpl implements CustomerService {
         String address = QuickInOut.inputOutput("Enter address: ");
         //thêm object vào List:
         customerList.add(new Customer(customerCode, name, dateOfBirth, gender, idNumber, phone, email, type, address));
-        customerFile.writeData(PATH_FILE, customerList);
+        customerFile.writeData(PATH_CUSTOMER, customerList);
 
     }
 
@@ -70,7 +70,7 @@ public class CustomerServiceImpl implements CustomerService {
                     String type = CheckProperty.checkInputProperty(customerType);
                     customer.setCustomerType(type);
                     customer.setAddress(QuickInOut.inputOutput("Enter new address: "));
-                    customerFile.writeData(PATH_FILE, customerList);
+                    customerFile.writeData(PATH_CUSTOMER, customerList);
                 }
             }
             if (!check) {
@@ -78,4 +78,8 @@ public class CustomerServiceImpl implements CustomerService {
             }
         }
     }
+    public static Collection<Customer> getCustomerList(){
+         return customerList;
+    }
 }
+// 5/7: sửa tên link file customer: PATH_FILE --> PATH_CUSTOMER

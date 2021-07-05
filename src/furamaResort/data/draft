@@ -54,6 +54,25 @@ public static String validateAge() {
         return birthDate;
     }
 
+    task6: addNewBooking - hiển thị list customers -- chọn code:
+        public static void main(String[] args) {
+             Collection<Customer> customers = new ArrayList<>();
+             customers = (new ReadAndWrite<Customer>()).readData(new File("D:\\module2\\src\\furamaResort\\data\\customer"));
+            System.out.println("Customer list: ");
+            int i = 0;
+            String[]arr = new String[customers.size()];
+            for (Customer customer : customers) {
+                arr[i] = customer.getCode();
+                i++;
+                System.out.println(i + ". " + customer.getCode() + ": " +  customer);
+            }
+
+            System.out.println(Arrays.toString(arr));
+            System.out.println("please enter number to choose customer code: ");
+            String customerCode = CheckProperty.checkInputProperty(arr);
+        }
+
+
 
 
 

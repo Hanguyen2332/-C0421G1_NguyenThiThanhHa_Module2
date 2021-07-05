@@ -2,18 +2,17 @@ package furamaResort.services;
 
 import furamaResort.libs.CheckProperty;
 import furamaResort.libs.QuickInOut;
-import furamaResort.models.Facility;
-import furamaResort.models.House;
-import furamaResort.models.Room;
-import furamaResort.models.Villa;
+import furamaResort.models.*;
 
 import furamaResort.utils.ReadAndWriteMap;
 import furamaResort.utils.ValidateInputData;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class FacilityServiceImpl implements FacilityService {
+    private static Map<Facility, Integer> facilityMap = new LinkedHashMap<>();
     private static Map<Villa, Integer> villaMap = new LinkedHashMap<>(); //nếu data-type là Facility --> khi edit, không thể gọi thuộc tính riêng của từng service
     private static Map<House, Integer> houseMap = new LinkedHashMap<>();
     private static Map<Room, Integer> roomMap = new LinkedHashMap<>();
@@ -33,6 +32,9 @@ public class FacilityServiceImpl implements FacilityService {
         villaMap = villaFile.readData(PATH_VILLA);
         houseMap = houseFile.readData(PATH_HOUSE);
         roomMap = roomFile.readData(PATH_ROOM);
+        facilityMap.putAll(villaMap);
+        facilityMap.putAll(houseMap);
+        facilityMap.putAll(roomMap);
     }
 
     @Override
@@ -40,13 +42,7 @@ public class FacilityServiceImpl implements FacilityService {
         if (villaMap.size() == 0 && houseMap.size() == 0 && roomMap.size() == 0) {
             System.err.println("Facility list is EMPTY");
         } else {
-            for (Villa service : villaMap.keySet()) {
-                System.out.println(service);
-            }
-            for (House service : houseMap.keySet()) {
-                System.out.println(service);
-            }
-            for (Room service : roomMap.keySet()) {
+            for (Facility service : facilityMap.keySet()) {
                 System.out.println(service);
             }
         }
@@ -54,29 +50,14 @@ public class FacilityServiceImpl implements FacilityService {
 
     @Override
     public void displayMaintainList() {
-        int countVilla = 0;
-        int countHouse = 0;
-        int countRoom = 0;
-        for (Map.Entry<Villa, Integer> service : villaMap.entrySet()) {
+        int count = 0;
+        for (Map.Entry<Facility, Integer> service : facilityMap.entrySet()) {
             if (service.getValue() == 5) {
                 System.out.println(service);
-                countVilla++;
+                count++;
             }
         }
-
-        for (Map.Entry<House, Integer> service : houseMap.entrySet()) {
-            if (service.getValue() == 5) {
-                System.out.println(service);
-                countHouse++;
-            }
-        }
-        for (Map.Entry<Room, Integer> service : roomMap.entrySet()) {
-            if (service.getValue() == 5) {
-                System.out.println(service);
-                countRoom++;
-            }
-        }
-        if (countVilla == 0 && countHouse == 0 && countRoom == 0) {
+        if (count == 0) {
             System.err.println("No facility need to maintain ");
         }
     }
@@ -211,6 +192,10 @@ public class FacilityServiceImpl implements FacilityService {
                 System.out.println("NOT found this villa code. Please try again: ");
             }
         }
+    }
+
+    public static Map<Facility, Integer> getFacilityMap() {
+        return facilityMap;
     }
 }
 /*note:

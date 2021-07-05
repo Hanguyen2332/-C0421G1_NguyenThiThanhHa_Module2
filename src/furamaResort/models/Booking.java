@@ -3,7 +3,7 @@ package furamaResort.models;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Booking implements Serializable, Comparable<Booking> {
+public class Booking implements Serializable {
     private String bookingId;
     private String startDay;
     private String endDay;
@@ -81,10 +81,5 @@ public class Booking implements Serializable, Comparable<Booking> {
                 ", serviceName='" + serviceName + '\'' +
                 ", serviceType='" + serviceType + '\'' +
                 '}';
-    }
-
-    @Override
-    public int compareTo(Booking o) {
-        return 0;
     }
 }
