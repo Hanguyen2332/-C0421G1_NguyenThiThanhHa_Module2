@@ -38,7 +38,7 @@ public class House extends Facility {
     public String toString() {
         return "House{" +
                 "roomStandard='" + standard + '\'' +
-                ", floors=" + floors +
+                ", floors= " + floors + super.toString() +
                 '}';
     }
 }

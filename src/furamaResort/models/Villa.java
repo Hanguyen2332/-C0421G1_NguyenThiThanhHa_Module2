@@ -53,7 +53,7 @@ public class Villa extends Facility {
         return "Villa{" +
                 "roomStandard='" + standard + '\'' +
                 ", poolArea=" + poolArea +
-                ", floors=" + floors +
+                ", floors=" + floors + super.toString() +
                 '}';
     }
 }

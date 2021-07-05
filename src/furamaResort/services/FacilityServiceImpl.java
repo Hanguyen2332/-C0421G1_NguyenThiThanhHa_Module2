@@ -27,49 +27,51 @@ public class FacilityServiceImpl implements FacilityService {
     //room
     private static ReadAndWriteMap<Room, Integer> roomFile = new ReadAndWriteMap<>();
     private static final String PATH_ROOM = "D:\\module2\\src\\furamaResort\\data\\room";
+
     //khoi tạo giá trị cho list từ file:
- static {
+    static {
         villaMap = villaFile.readData(PATH_VILLA);
         houseMap = houseFile.readData(PATH_HOUSE);
         roomMap = roomFile.readData(PATH_ROOM);
     }
 
     @Override
-    public void display() {   //NG : mỗi loại dịch vụ chỉ display ra đc những thuộc tính riêng --> writeFile() đang có vấn đề?? hay readFile()??/
-     if (villaMap.size()==0 && houseMap.size() == 0 && roomMap.size() == 0) {
-         System.err.println("Facility list is EMPTY");
-     }
-     for (Facility service : villaMap.keySet()) {
-            System.out.println(service);
-        }
-        for (Facility service : houseMap.keySet()) {
-            System.out.println(service);
-        }
-        for (Facility service : roomMap.keySet()) {
-            System.out.println(service);
+    public void display() {
+        if (villaMap.size() == 0 && houseMap.size() == 0 && roomMap.size() == 0) {
+            System.err.println("Facility list is EMPTY");
+        } else {
+            for (Villa service : villaMap.keySet()) {
+                System.out.println(service);
+            }
+            for (House service : houseMap.keySet()) {
+                System.out.println(service);
+            }
+            for (Room service : roomMap.keySet()) {
+                System.out.println(service);
+            }
         }
     }
 
     @Override
     public void displayMaintainList() {
-     int countVilla = 0;
-     int countHouse = 0;
-     int countRoom = 0;
+        int countVilla = 0;
+        int countHouse = 0;
+        int countRoom = 0;
         for (Map.Entry<Villa, Integer> service : villaMap.entrySet()) {
-            if (service.getValue()==5) {
+            if (service.getValue() == 5) {
                 System.out.println(service);
                 countVilla++;
             }
         }
 
         for (Map.Entry<House, Integer> service : houseMap.entrySet()) {
-            if (service.getValue()==5) {
+            if (service.getValue() == 5) {
                 System.out.println(service);
                 countHouse++;
             }
         }
         for (Map.Entry<Room, Integer> service : roomMap.entrySet()) {
-            if (service.getValue()==5) {
+            if (service.getValue() == 5) {
                 System.out.println(service);
                 countRoom++;
             }
@@ -86,7 +88,7 @@ public class FacilityServiceImpl implements FacilityService {
         int maxNumsPeople = ValidateInputData.maxNumsPeople();
         //nhập kiểu thuê:
         System.out.println("Enter rental type: "); //không cần regex, vì chỉ có 4 lựa chọn cố định
-        String [] villaRentalTypes = {"VL-year","VL-month","VL-day","VL-hour"};
+        String[] villaRentalTypes = {"VL-year", "VL-month", "VL-day", "VL-hour"};
         String rentalType = CheckProperty.checkInputProperty(villaRentalTypes);
         //nhập standard:
         String villaStandard = ValidateInputData.villaStandard();
@@ -95,10 +97,11 @@ public class FacilityServiceImpl implements FacilityService {
         float poolArea = ValidateInputData.area();
         //floors
         int floors = ValidateInputData.numsOfFoors();
-        villaMap.put(new Villa(villaCode,useArea,rentalFee,maxNumsPeople,rentalType,villaStandard,poolArea,floors),0);
-        villaFile.writeData(PATH_VILLA,villaMap);
+        villaMap.put(new Villa(villaCode, useArea, rentalFee, maxNumsPeople, rentalType, villaStandard, poolArea, floors), 0);
+        villaFile.writeData(PATH_VILLA, villaMap);
 
     }
+
     public void addNewHouse() {
         String houseCode = ValidateInputData.houseCode();
         float useArea = ValidateInputData.area();
@@ -106,15 +109,16 @@ public class FacilityServiceImpl implements FacilityService {
         int maxNumsPeople = ValidateInputData.maxNumsPeople();
         //nhập kiểu thuê:
         System.out.println("Enter rental type: ");
-        String [] villaRentalTypes = {"HO-year","HO-month","HO-day","HO-hour"};
+        String[] villaRentalTypes = {"HO-year", "HO-month", "HO-day", "HO-hour"};
         String rentalType = CheckProperty.checkInputProperty(villaRentalTypes);
         //nhập standard:
         String houseStandard = ValidateInputData.houseStandard();
         //floors
         int floors = ValidateInputData.numsOfFoors();
-        houseMap.put(new House(houseCode,useArea,rentalFee,maxNumsPeople,rentalType,houseStandard,floors),0);
-        houseFile.writeData(PATH_HOUSE,houseMap);
+        houseMap.put(new House(houseCode, useArea, rentalFee, maxNumsPeople, rentalType, houseStandard, floors), 0);
+        houseFile.writeData(PATH_HOUSE, houseMap);
     }
+
     public void addNewRoom() {
         String roomCode = ValidateInputData.roomCode();
         float useArea = ValidateInputData.area();
@@ -122,12 +126,12 @@ public class FacilityServiceImpl implements FacilityService {
         int maxNumsPeople = ValidateInputData.maxNumsPeople();
         //nhập kiểu thuê:
         System.out.println("Enter rental type: ");
-        String [] villaRentalTypes = {"RO-year","RO-month","RO-day","RO-hour"};
+        String[] villaRentalTypes = {"RO-year", "RO-month", "RO-day", "RO-hour"};
         String rentalType = CheckProperty.checkInputProperty(villaRentalTypes);
         //tên dịch vụ đi kèm (Accompanied Service):
         String accompService = QuickInOut.inputOutput("Enter Accompanied Service: ");
-        roomMap.put(new Room(roomCode,useArea,rentalFee,maxNumsPeople,rentalType,accompService),0);
-        roomFile.writeData(PATH_ROOM,roomMap);
+        roomMap.put(new Room(roomCode, useArea, rentalFee, maxNumsPeople, rentalType, accompService), 0);
+        roomFile.writeData(PATH_ROOM, roomMap);
     }
 
     @Override
@@ -135,19 +139,19 @@ public class FacilityServiceImpl implements FacilityService {
         boolean check = false;
         while (!check) {
             String villaCode = ValidateInputData.villaCode();
-            for (Villa service: villaMap.keySet()) {
+            for (Villa service : villaMap.keySet()) {
                 if (villaCode.equals(service.getServiceCode())) {
                     check = true;
                     service.setUseArea(ValidateInputData.area());
                     service.setRentalFees(ValidateInputData.rentalFee());
                     service.setMaxNumsPeople(ValidateInputData.maxNumsPeople());
                     System.out.println("Enter rental type: "); //không cần regex, vì chỉ có 4 lựa chọn cố định
-                    String [] villaRentalTypes = {"VL-year","VL-month","VL-day","VL-hour"};
+                    String[] villaRentalTypes = {"VL-year", "VL-month", "VL-day", "VL-hour"};
                     service.setRentalType(CheckProperty.checkInputProperty(villaRentalTypes));
                     service.setStandard(ValidateInputData.villaStandard());
                     service.setPoolArea(ValidateInputData.area());
                     service.setFloors(ValidateInputData.numsOfFoors());
-                    villaFile.writeData(PATH_VILLA,villaMap);
+                    villaFile.writeData(PATH_VILLA, villaMap);
                     break;
                 }
             }
@@ -162,18 +166,18 @@ public class FacilityServiceImpl implements FacilityService {
         boolean check = false;
         while (!check) {
             String houseCode = ValidateInputData.houseCode();
-            for (House service: houseMap.keySet()) {
+            for (House service : houseMap.keySet()) {
                 if (houseCode.equals(service.getServiceCode())) {
                     check = true;
                     service.setUseArea(ValidateInputData.area());
                     service.setRentalFees(ValidateInputData.rentalFee());
                     service.setMaxNumsPeople(ValidateInputData.maxNumsPeople());
                     System.out.println("Enter rental type: "); //không cần regex, vì chỉ có 4 lựa chọn cố định
-                    String [] villaRentalTypes = {"VL-year","VL-month","VL-day","VL-hour"};
+                    String[] villaRentalTypes = {"VL-year", "VL-month", "VL-day", "VL-hour"};
                     service.setRentalType(CheckProperty.checkInputProperty(villaRentalTypes));
                     service.setStandard(ValidateInputData.villaStandard());
                     service.setFloors(ValidateInputData.numsOfFoors());
-                    houseFile.writeData(PATH_HOUSE,houseMap);
+                    houseFile.writeData(PATH_HOUSE, houseMap);
                     break;
                 }
             }
@@ -189,17 +193,17 @@ public class FacilityServiceImpl implements FacilityService {
         boolean check = false;
         while (!check) {
             String roomCode = ValidateInputData.roomCode();
-            for (Room service: roomMap.keySet()) {
+            for (Room service : roomMap.keySet()) {
                 if (roomCode.equals(service.getServiceCode())) {
                     check = true;
                     service.setUseArea(ValidateInputData.area());
                     service.setRentalFees(ValidateInputData.rentalFee());
                     service.setMaxNumsPeople(ValidateInputData.maxNumsPeople());
                     System.out.println("Enter rental type: "); //không cần regex, vì chỉ có 4 lựa chọn cố định
-                    String [] villaRentalTypes = {"VL-year","VL-month","VL-day","VL-hour"};
+                    String[] villaRentalTypes = {"VL-year", "VL-month", "VL-day", "VL-hour"};
                     service.setRentalType(CheckProperty.checkInputProperty(villaRentalTypes));
                     service.setFreeServices(QuickInOut.inputOutput("Enter free services name: "));
-                    roomFile.writeData(PATH_ROOM,roomMap);
+                    roomFile.writeData(PATH_ROOM, roomMap);
                     break;
                 }
             }
@@ -215,7 +219,7 @@ public class FacilityServiceImpl implements FacilityService {
  --> Nhưng nếu thoát luồng, chạy lại -->ok
 + Nếu gọi sử dụng trực tiếp "roomMap" --> OK
 2. NG - display(): mỗi loại dịch vụ chỉ display ra đc những thuộc tính riêng --> writeFile() đang có vấn đề?? hay readFile()??/
-
+--> do chưa toString()
 2.  làm sao để hiển thị số tiền theo định dạng $, nhưng vẫn là kiểu số thực?
    vì nếu để là double --> nếu số tiền >=100tr --> vượt range
    2. hàm edit() phải viết 3 method riêng??

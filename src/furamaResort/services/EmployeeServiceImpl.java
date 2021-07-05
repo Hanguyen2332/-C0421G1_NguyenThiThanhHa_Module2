@@ -7,6 +7,7 @@ import furamaResort.libs.QuickInOut;
 import furamaResort.models.employee.AcademicLevel;
 import furamaResort.models.employee.Employee;
 import furamaResort.utils.ReadAndWrite;
+import furamaResort.utils.ValidateInputData;
 
 import java.io.File;
 import java.util.*;
@@ -43,7 +44,7 @@ public class EmployeeServiceImpl extends CheckProperty implements EmployeeServic
     public void addNew() {  // đã update: thêm mới vào file IO  -ok
         String id = QuickInOut.inputOutput("Enter employee code : ");
         String name = QuickInOut.inputOutput("Enter employee's full name: ");
-        String dateOfBirth = QuickInOut.inputOutput("Enter date Of Birth: ");
+        String dateOfBirth = ValidateInputData.dateOfBirth();
         String gender = QuickInOut.inputOutput("Enter gender: ");
         String idNumber = QuickInOut.inputOutput("Enter ID Number: ");
         String phone = QuickInOut.inputOutput("Enter phone number: ");
@@ -72,7 +73,7 @@ public class EmployeeServiceImpl extends CheckProperty implements EmployeeServic
                 if (employeeNumber.equals(employee.getCode())) {
                     check = true;
                     employee.setFullName(QuickInOut.inputOutput("Enter new Name:"));
-                    employee.setDateOfBirth(QuickInOut.inputOutput("Enter new date of birth:"));
+                    employee.setDateOfBirth(ValidateInputData.dateOfBirth());
                     employee.setGender(QuickInOut.inputOutput("Enter new gender:"));
                     employee.setIdNumber(QuickInOut.inputOutput("Enter new idNumber:"));
                     employee.setPhoneNumber(QuickInOut.inputOutput("Enter new phoneNumber:"));

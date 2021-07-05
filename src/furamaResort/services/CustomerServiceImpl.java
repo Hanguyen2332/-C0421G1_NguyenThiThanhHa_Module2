@@ -5,6 +5,7 @@ import furamaResort.libs.QuickInOut;
 import furamaResort.models.Customer;
 
 import furamaResort.utils.ReadAndWrite;
+import furamaResort.utils.ValidateInputData;
 
 import java.io.File;
 import java.util.Collection;
@@ -36,7 +37,7 @@ public class CustomerServiceImpl implements CustomerService {
     public void addNew() {  //ok
         String customerCode = QuickInOut.inputOutput("Enter employee code : ");
         String name = QuickInOut.inputOutput("Enter employee's full name: ");
-        String dateOfBirth = QuickInOut.inputOutput("Enter date Of Birth: ");
+        String dateOfBirth = ValidateInputData.dateOfBirth();
         String gender = QuickInOut.inputOutput("Enter gender: ");
         String idNumber = QuickInOut.inputOutput("Enter ID Number: ");
         String phone = QuickInOut.inputOutput("Enter phone number: ");
@@ -61,6 +62,7 @@ public class CustomerServiceImpl implements CustomerService {
                 if (customerCode.equals(customer.getCode())) {
                     check = true;
                     customer.setFullName(QuickInOut.inputOutput("Enter new Name:"));
+                    customer.setDateOfBirth(ValidateInputData.dateOfBirth());
                     customer.setGender(QuickInOut.inputOutput("Enter new gender:"));
                     customer.setIdNumber(QuickInOut.inputOutput("Enter new idNumber:"));
                     customer.setPhoneNumber(QuickInOut.inputOutput("Enter new phoneNumber:"));
