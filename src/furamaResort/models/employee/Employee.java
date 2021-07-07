@@ -2,24 +2,21 @@ package furamaResort.models.employee;
 
 import furamaResort.models.Person;
 
-import java.io.Serializable;
-import java.util.Date;
-
 public class Employee extends Person {
     private AcademicLevel academicLevel;// (Trung cấp, Cao đẳng, Đại học và sau đại học)  Note: có thể để data-type: là String or AcademicLevel
     private String position;   //(Lễ tân, phục vụ, chuyên viên, giám sát, quản lý, giám đốc.)
-    private float salary;
+    private double salary;
 
     public Employee() {
     }
 
-    public Employee(AcademicLevel academicLevel, String position, float salary) {
+    public Employee(AcademicLevel academicLevel, String position, double salary) {
         this.academicLevel = academicLevel;
         this.position = position;
         this.salary = salary;
     }
 
-    public Employee(String code, String fullName, String dateOfBirth, String gender, String idNumber, String phoneNumber, String email, AcademicLevel academicLevel, String position, float salary) {
+    public Employee(String code, String fullName, String dateOfBirth, String gender, String idNumber, String phoneNumber, String email, AcademicLevel academicLevel, String position, double salary) {
         super(code, fullName, dateOfBirth, gender, idNumber, phoneNumber, email);
         this.academicLevel = academicLevel;
         this.position = position;
@@ -42,11 +39,11 @@ public class Employee extends Person {
         this.position = position;
     }
 
-    public float getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(float salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 

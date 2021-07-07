@@ -73,8 +73,29 @@ public static String validateAge() {
         }
 
 
+//task 6: creatNewContract:
+catch (NullPointerException e) {
+                e.getMessage();
+//            System.out.println("Booking list is empty!");
+            } finally {
+                if (!bookingSet.isEmpty()) {
+                    bookingSet.remove(booking); //TH là room --> xóa booking không cần tạo hợp đồng ---> có sai không?
+                    bookingFile.writeData(PATH_BOOKING, bookingSet);
+                }
 
+////    static {
+  //        bookingSet.add(new Booking("BKVL-1234", "05/07/2021", "07/07/2021", "CTM111",
+  //                "SVVL-1234"));
+  //        bookingSet.add(new Booking("BKHO-4336", "19/07/2021", "20/08/2021", "CTM444",
+  //                "SVHO-6780"));
+  //        bookingSet.add(new Booking("BKRO-5311", "08/07/2021", "13/07/2021", "CTM333",
+  //                "SVRO-5151"));
+  //        bookingSet.add(new Booking("BKHO-4336", "05/07/2021", "09/07/2021", "CTM222",
+  //                "SVHO-4141"));
+  //    }
 
-
+Bài 2: Với inputString = "abac", thì kết quả differentSubstringsTrie(inputString) = 9.
+9 xâu con khác nhau của xâu đầu vào là:
+"a", "b", "c", "ab", "ac", "ba", "aba", "bac", "abac"
 
 

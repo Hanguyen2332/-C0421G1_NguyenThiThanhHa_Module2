@@ -19,12 +19,12 @@ public class CheckValid {
         return choice;
     }
 
-    public static float checkFloatException() {
+    public static double checkFloatException() {  //sửa: chuyển float --> double
         boolean check = false;
-        float value = 0;
+        double value = 0;
         while (!check) {
             try {
-                value = Float.parseFloat(sc.nextLine());
+                value = Double.parseDouble(sc.nextLine());
                 check = true;
             } catch (NumberFormatException e) {
                 System.err.println("Wrong format! Please enter NUMBER!");
@@ -33,3 +33,4 @@ public class CheckValid {
         return value;
     }
 }
+

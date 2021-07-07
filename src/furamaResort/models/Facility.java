@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public abstract class Facility implements Serializable {
     private String serviceCode;
-    private float useArea;
+    private double useArea;
     private double rentalFees;
     private int maxNumsPeople;
     private String rentalType;
@@ -12,7 +12,7 @@ public abstract class Facility implements Serializable {
     public Facility() {
     }
 
-    public Facility(String serviceCode, float useArea, double rentalFees, int maxNumsPeople, String rentalType) {
+    public Facility(String serviceCode, double useArea, double rentalFees, int maxNumsPeople, String rentalType) {
         this.serviceCode = serviceCode;
         this.useArea = useArea;
         this.rentalFees = rentalFees;
@@ -28,11 +28,11 @@ public abstract class Facility implements Serializable {
         this.serviceCode = serviceCode;
     }
 
-    public float getUseArea() {
+    public double getUseArea() {
         return useArea;
     }
 
-    public void setUseArea(float useArea) {
+    public void setUseArea(double useArea) {
         this.useArea = useArea;
     }
 

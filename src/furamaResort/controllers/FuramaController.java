@@ -33,7 +33,7 @@ public class FuramaController {
                     BookingController.bookingMenu();
                     break;
                 case 5:
-                    BusinessController.bookingMenu();
+                    PromotionController.bookingMenu();
                     break;
                 case 6:
                     System.exit(-1);

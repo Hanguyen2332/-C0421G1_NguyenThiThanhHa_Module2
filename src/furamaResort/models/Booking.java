@@ -2,6 +2,7 @@ package furamaResort.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 public class Booking implements Serializable {
     private String bookingId;
@@ -9,18 +10,16 @@ public class Booking implements Serializable {
     private String endDay;
     private String customerId;
     private String serviceName;
-    private String serviceType;  //???? loại dịch vụ là gì?
 
     public Booking() {
     }
 
-    public Booking(String bookingId, String startDay, String endDay, String customerId, String serviceName, String serviceType) {
+    public Booking(String bookingId, String startDay, String endDay, String customerId, String serviceName) {
         this.bookingId = bookingId;
         this.startDay = startDay;
         this.endDay = endDay;
         this.customerId = customerId;
         this.serviceName = serviceName;
-        this.serviceType = serviceType;
     }
 
     public String getBookingId() {
@@ -63,23 +62,29 @@ public class Booking implements Serializable {
         this.serviceName = serviceName;
     }
 
-    public String getServiceType() {
-        return serviceType;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Booking booking = (Booking) o;
+        return Objects.equals(bookingId, booking.bookingId) &&
+                Objects.equals(customerId, booking.customerId);
     }
 
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
+    @Override
+    public int hashCode() {
+        return Objects.hash(bookingId, customerId);
     }
 
     @Override
     public String toString() {
-        return "Contract{" +
+        return "{" +
                 "bookingId='" + bookingId + '\'' +
-                ", startDay=" + startDay +
-                ", endDay=" + endDay +
+                ", startDay='" + startDay + '\'' +
+                ", endDay='" + endDay + '\'' +
                 ", customerId='" + customerId + '\'' +
                 ", serviceName='" + serviceName + '\'' +
-                ", serviceType='" + serviceType + '\'' +
                 '}';
     }
 }

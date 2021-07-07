@@ -8,6 +8,7 @@ import furamaResort.utils.ReadAndWriteMap;
 import furamaResort.utils.ValidateInputData;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -37,6 +38,11 @@ public class FacilityServiceImpl implements FacilityService {
         facilityMap.putAll(roomMap);
     }
 
+//    public static void main(String[] args) {////NG: chưa wite value mới vào file house/room/villa..
+//
+//    }
+
+
     @Override
     public void display() {
         if (villaMap.size() == 0 && houseMap.size() == 0 && roomMap.size() == 0) {
@@ -50,6 +56,27 @@ public class FacilityServiceImpl implements FacilityService {
 
     @Override
     public void displayMaintainList() {
+        Collection<Booking> bookings = BookingServiceIplm.getBookingSet();
+        for (Booking booking : bookings) { //VD: 5 booking - 10 facility
+            for (Map.Entry<Facility, Integer> service : facilityMap.entrySet()) {
+                if (booking.getServiceName().equals(service.getKey().getServiceCode()) && service.getValue() < 5) {
+                    int nums = service.getValue() + 1;
+                    facilityMap.put(service.getKey(), nums);
+                    //ghi nhận giá trị mới vào file
+                    if (service.getKey() instanceof Villa) {
+                        villaMap.put((Villa) service.getKey(), nums);
+                        villaFile.writeData(PATH_VILLA, villaMap);
+                    } else if (service.getKey() instanceof House) {
+                        houseMap.put((House) service.getKey(), nums);
+                        houseFile.writeData(PATH_HOUSE, houseMap);
+                    } else {
+                        roomMap.put((Room) service.getKey(), nums);
+                        roomFile.writeData(PATH_ROOM, roomMap);
+                    }
+                }
+            }
+        }
+        //in list cần bảo trì:
         int count = 0;
         for (Map.Entry<Facility, Integer> service : facilityMap.entrySet()) {
             if (service.getValue() == 5) {
@@ -63,8 +90,25 @@ public class FacilityServiceImpl implements FacilityService {
     }
 
     public void addNewVilla() {  //ok
-        String villaCode = ValidateInputData.villaCode();  //??? Mã dịch vụ - tên dịch vụ: là 1 hay 2???
-        float useArea = ValidateInputData.area();
+        //nhap villaCode -  check code trùng?
+        String villaCode = null;
+        boolean check = false;
+        while (!check) {
+            int count = 0;
+            villaCode = ValidateInputData.villaCode();  //regex khác nhau --> không tạo method check chung cho 3 loại đc!
+            for (Villa villa : villaMap.keySet()) {
+                if (!villaCode.equals(villa.getServiceCode())) {
+                    count++;
+                }
+            }
+            if (count == villaMap.size()) {
+                System.out.println("ok");
+                check = true;
+            } else {
+                System.err.println("Villa Code cannot be duplicated! Please enter again: ");
+            }
+        }
+        double useArea = ValidateInputData.area();
         double rentalFee = ValidateInputData.rentalFee();  //Note: sử dụng Ex của float cho double -->kq check runtime : chỉ hiển thị được tới range của Float, vượt --> báo sai regex
         int maxNumsPeople = ValidateInputData.maxNumsPeople();
         //nhập kiểu thuê:
@@ -74,18 +118,36 @@ public class FacilityServiceImpl implements FacilityService {
         //nhập standard:
         String villaStandard = ValidateInputData.villaStandard();
         //pool
-        System.out.println("Enter pool area: ");
-        float poolArea = ValidateInputData.area();
+        System.out.println("Enter pool : ");
+        double poolArea = ValidateInputData.area();
         //floors
-        int floors = ValidateInputData.numsOfFoors();
+        int floors = ValidateInputData.numsOfFloors();
         villaMap.put(new Villa(villaCode, useArea, rentalFee, maxNumsPeople, rentalType, villaStandard, poolArea, floors), 0);
         villaFile.writeData(PATH_VILLA, villaMap);
-
+        facilityMap.putAll(villaMap);
     }
 
     public void addNewHouse() {
-        String houseCode = ValidateInputData.houseCode();
-        float useArea = ValidateInputData.area();
+        //nhap houseCode -  check code trùng?
+        String houseCode = null;
+        boolean check = false;
+        while (!check) {
+            int count = 0;
+            houseCode = ValidateInputData.houseCode();
+            for (House house : houseMap.keySet()) {
+                if (!houseCode.equals(house.getServiceCode())) {
+                    count++;
+                }
+            }
+            if (count == houseMap.size()) {
+                System.out.println("ok");
+                check = true;
+            } else {
+                System.err.println("House Code cannot be duplicated! Please enter again: ");
+            }
+        }
+
+        double useArea = ValidateInputData.area();
         double rentalFee = ValidateInputData.rentalFee();
         int maxNumsPeople = ValidateInputData.maxNumsPeople();
         //nhập kiểu thuê:
@@ -95,14 +157,33 @@ public class FacilityServiceImpl implements FacilityService {
         //nhập standard:
         String houseStandard = ValidateInputData.houseStandard();
         //floors
-        int floors = ValidateInputData.numsOfFoors();
+        int floors = ValidateInputData.numsOfFloors();
         houseMap.put(new House(houseCode, useArea, rentalFee, maxNumsPeople, rentalType, houseStandard, floors), 0);
         houseFile.writeData(PATH_HOUSE, houseMap);
+        facilityMap.putAll(houseMap);
     }
 
     public void addNewRoom() {
-        String roomCode = ValidateInputData.roomCode();
-        float useArea = ValidateInputData.area();
+        //nhap roomCode -  check code trùng?
+        String roomCode = null;
+        boolean check = false;
+        while (!check) {
+            int count = 0;
+            roomCode = ValidateInputData.roomCode();
+            for (Room room : roomMap.keySet()) {
+                if (!roomCode.equals(room.getServiceCode())) {
+                    count++;
+                }
+            }
+            if (count == roomMap.size()) {
+                System.out.println("ok");
+                check = true;
+            } else {
+                System.err.println("Room Code cannot be duplicated! Please enter again: ");
+            }
+        }
+        //
+        double useArea = ValidateInputData.area();
         double rentalFee = ValidateInputData.rentalFee();
         int maxNumsPeople = ValidateInputData.maxNumsPeople();
         //nhập kiểu thuê:
@@ -113,6 +194,7 @@ public class FacilityServiceImpl implements FacilityService {
         String accompService = QuickInOut.inputOutput("Enter Accompanied Service: ");
         roomMap.put(new Room(roomCode, useArea, rentalFee, maxNumsPeople, rentalType, accompService), 0);
         roomFile.writeData(PATH_ROOM, roomMap);
+        facilityMap.putAll(roomMap);
     }
 
     @Override
@@ -131,8 +213,9 @@ public class FacilityServiceImpl implements FacilityService {
                     service.setRentalType(CheckProperty.checkInputProperty(villaRentalTypes));
                     service.setStandard(ValidateInputData.villaStandard());
                     service.setPoolArea(ValidateInputData.area());
-                    service.setFloors(ValidateInputData.numsOfFoors());
+                    service.setFloors(ValidateInputData.numsOfFloors());
                     villaFile.writeData(PATH_VILLA, villaMap);
+                    facilityMap.putAll(villaFile.readData(PATH_VILLA));
                     break;
                 }
             }
@@ -157,8 +240,9 @@ public class FacilityServiceImpl implements FacilityService {
                     String[] villaRentalTypes = {"VL-year", "VL-month", "VL-day", "VL-hour"};
                     service.setRentalType(CheckProperty.checkInputProperty(villaRentalTypes));
                     service.setStandard(ValidateInputData.villaStandard());
-                    service.setFloors(ValidateInputData.numsOfFoors());
+                    service.setFloors(ValidateInputData.numsOfFloors());
                     houseFile.writeData(PATH_HOUSE, houseMap);
+                    facilityMap.putAll(houseFile.readData(PATH_HOUSE));
                     break;
                 }
             }
@@ -185,6 +269,7 @@ public class FacilityServiceImpl implements FacilityService {
                     service.setRentalType(CheckProperty.checkInputProperty(villaRentalTypes));
                     service.setFreeServices(QuickInOut.inputOutput("Enter free services name: "));
                     roomFile.writeData(PATH_ROOM, roomMap);
+                    facilityMap.putAll(roomFile.readData(PATH_ROOM));
                     break;
                 }
             }

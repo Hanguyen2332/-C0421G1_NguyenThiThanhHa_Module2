@@ -35,6 +35,9 @@ public class EmployeeServiceImpl extends CheckProperty implements EmployeeServic
     @Override
     public void display() {  //ok
         // báo file rỗng: đã xử lý tại class ReadAndWrite: --> catch EOFEEx
+        if (employeeList.isEmpty()) {
+            System.err.println("List is empty!");
+        }
         for (Employee employee : employeeList) {
             System.out.println(employee);
         }
@@ -57,7 +60,7 @@ public class EmployeeServiceImpl extends CheckProperty implements EmployeeServic
         String position = checkInputProperty(positions);
         //lương:
         System.out.println("Enter salary: ");
-        float salary = CheckValid.checkFloatException();
+        double salary = CheckValid.checkFloatException(); //sửa: float --> double
         //add new:
         employeeList.add(new Employee(id, name, dateOfBirth, gender, idNumber, phone, email, newLevel, position, salary));
         employeeFile.writeData(PATH_FILE, employeeList);  //3. add new vào list--> ghi đè trở lại vào file --> update data

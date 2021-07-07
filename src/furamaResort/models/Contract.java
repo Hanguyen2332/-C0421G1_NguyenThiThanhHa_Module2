@@ -1,7 +1,9 @@
 package furamaResort.models;
 
-public class Contract {
-   private String contractNumber;
+import java.io.Serializable;
+
+public class Contract implements Serializable {
+   private String contractCode;
    private String bookingId;
    private double deposit;
    private double totalPayment;
@@ -10,20 +12,20 @@ public class Contract {
     public Contract() {
     }
 
-    public Contract(String contractNumber, String bookingId, double deposit, double totalPayment, String customerId) {
-        this.contractNumber = contractNumber;
+    public Contract(String contractCode, String bookingId, double deposit, double totalPayment, String customerId) {
+        this.contractCode = contractCode;
         this.bookingId = bookingId;
         this.deposit = deposit;
         this.totalPayment = totalPayment;
         this.customerId = customerId;
     }
 
-    public String getContractNumber() {
-        return contractNumber;
+    public String getContractCode() {
+        return contractCode;
     }
 
-    public void setContractNumber(String contractNumber) {
-        this.contractNumber = contractNumber;
+    public void setContractCode(String contractNumber) {
+        this.contractCode = contractCode;
     }
 
     public String getBookingId() {
@@ -61,7 +63,7 @@ public class Contract {
     @Override
     public String toString() {
         return "Contract{" +
-                "contractNumber='" + contractNumber + '\'' +
+                "contractNumber='" + contractCode + '\'' +
                 ", bookingId='" + bookingId + '\'' +
                 ", deposit=" + deposit +
                 ", totalPayment=" + totalPayment +

@@ -28,12 +28,15 @@ public class BookingController {
                 break;
             case 3:
                 //goi ham CREATE contracts
+                bookingServiceIplm.creatNewContract();
                 break;
             case 4:
                 //goi ham DISPLAY contracts
+                bookingServiceIplm.displayContract();
                 break;
             case 5:
                 //goi ham EDIT contracts
+                bookingServiceIplm.editContract();
                 break;
             case 6:
                 //goi ham RETURN MENU
