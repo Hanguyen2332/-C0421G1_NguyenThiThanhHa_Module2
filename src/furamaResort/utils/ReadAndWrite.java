@@ -5,20 +5,18 @@ import furamaResort.models.employee.AcademicLevel;
 import furamaResort.models.employee.Employee;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
-public class ReadAndWrite<T> {  //OK
-    public Collection<T> readData(File file) {  //7.4: sửa: đổi List<T> --> Collection<T>
-        Collection<T> listObject = new ArrayList<>();
+public class ReadAndWrite {  //OK
+    public Object readData(File file) {  //7.4:   sửa: đổi List<T> --> Objects<T>
+        Object listObject = new Object();
         ObjectInputStream oips = null;
         try {
             if (!file.exists()) {
                 file.createNewFile();
             }
             oips = new ObjectInputStream(new FileInputStream(file));
-            listObject = (Collection<T>) oips.readObject();
+            listObject = oips.readObject();
         }
 //        catch (EOFException e) {   //EOFException - nếu luồng đầu vào chạm đến cuối trước khi đọc tám byte.   OK
 //            System.err.println("List is empty");
@@ -38,7 +36,7 @@ public class ReadAndWrite<T> {  //OK
     }
 
     //ham write:
-    public void writeData(String path, Collection<T> list) {  //OK
+    public void writeData(String path, Object list) {  //OK
         ObjectOutputStream oops = null;
         try {
             File file = new File(path);

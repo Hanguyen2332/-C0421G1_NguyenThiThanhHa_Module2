@@ -9,31 +9,36 @@ import furamaResort.services.facility.VillaIplm;
 import furamaResort.utils.*;
 
 import java.io.File;
-import java.util.*;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class BookingServiceIplm extends CheckProperty implements BookingService {
     //CHƯA ghi đè: hashCode + equals --> k cho nhập trùng
-    static Collection<Booking> bookingSet = new TreeSet<>(new ComparatorByDate());
-    static Collection<Booking> bookingNeedContractSet = new TreeSet<>(new ComparatorByDate()); //LIST tạm
+    static TreeSet<Booking> bookingSet = new TreeSet<>(new ComparatorByDate());
+    static TreeSet<Booking> bookingNeedContractSet = new TreeSet<>(new ComparatorByDate());
     //FILE chính thức
-    private static ReadAndWrite<Booking> bookingFile = new ReadAndWrite<>();
+    private static ReadAndWrite bookingFile = new ReadAndWrite();
     private static final String PATH_BOOKING = "src\\furamaResort\\data\\booking.csv";
     //File Booking mới cần tạo HĐ
-    private static ReadAndWrite<Booking> bookingNeedContractFile = new ReadAndWrite<>();
+    private static ReadAndWrite bookingNeedContractFile = new ReadAndWrite();
     private static final String PATH_WAITING_CONTRACT = "src\\furamaResort\\data\\bookingWaitingContract.csv";
 
-    static {
-        bookingSet = bookingFile.readData(new File(PATH_BOOKING));  //đọc file --> khởi tạo giá trị cho bookingSet
-        bookingNeedContractSet = bookingNeedContractFile.readData(new File(PATH_WAITING_CONTRACT));
-    }
+//    static {
+//        bookingSet = (TreeSet<Booking>) bookingFile.readData(new File(PATH_BOOKING));  //đọc file --> khởi tạo giá trị cho bookingSet
+//        bookingNeedContractSet = (TreeSet<Booking>) bookingNeedContractFile.readData(new File(PATH_WAITING_CONTRACT));
+//    }
 
     @Override
     public void display() { //ok
         if (bookingNeedContractSet.isEmpty()) {
             System.err.println("Not have new booking");
-        }
-        for (Booking element : bookingNeedContractSet) {
-            System.out.println(element);
+        }else {
+
+            for (Booking element : bookingNeedContractSet) {
+                System.out.println(element);
+            }
         }
     }
 

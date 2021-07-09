@@ -17,13 +17,13 @@ public class CustomerServiceImpl implements CustomerService {
     private static Scanner sc = new Scanner(System.in);
     private String[] customerType = {"Diamond", "Platinum", "Gold", "Silver", "Member"}; //tại sao biến mảng: không cần static--> vẫn gọi đc trong hàm?
     //file
-    public static ReadAndWrite<Customer> customerFile = new ReadAndWrite<>();
+    public static ReadAndWrite customerFile = new ReadAndWrite();
     private static final String PATH_CUSTOMER = "D:\\module2\\src\\furamaResort\\data\\customer.csv";
     private static File file = new File(PATH_CUSTOMER);
     //list:
     private static Collection<Customer> customerList = new LinkedList<>();  //sửa: List<T> --> Collection<T>
      static {
-        customerList = customerFile.readData(file);
+        customerList = (Collection<Customer>) customerFile.readData(file);
     }
 
     @Override

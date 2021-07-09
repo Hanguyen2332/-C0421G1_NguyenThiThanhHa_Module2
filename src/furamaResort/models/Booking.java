@@ -1,10 +1,8 @@
 package furamaResort.models;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
 
-public class Booking implements Serializable {
+public class Booking implements Serializable{
     private String bookingId;
     private String startDay;
     private String endDay;
@@ -62,20 +60,6 @@ public class Booking implements Serializable {
         this.serviceName = serviceName;
     }
 
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Booking booking = (Booking) o;
-//        return Objects.equals(bookingId, booking.bookingId) &&
-//                Objects.equals(customerId, booking.customerId);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(bookingId, customerId);
-//    }
 
     @Override
     public String toString() {

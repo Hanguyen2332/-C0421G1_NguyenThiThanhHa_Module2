@@ -15,14 +15,14 @@ public class ContractIplm implements ContractService {
     //list
     private static Collection<Contract> contractList = new ArrayList<>();
     //file contract
-    private static ReadAndWrite<Contract> contractFile = new ReadAndWrite<>();
+    private static ReadAndWrite contractFile = new ReadAndWrite();
     private static final String PATH_CONTRACT = "D:\\module2\\src\\furamaResort\\data\\contract.csv";
     //file booking mới - cần HĐ:
-    private static ReadAndWrite<Booking> bookingNeedContractFile = new ReadAndWrite<>();
+    private static ReadAndWrite bookingNeedContractFile = new ReadAndWrite();
     private static final String PATH_WAITING_CONTRACT = "src\\furamaResort\\data\\bookingWaitingContract.csv";
 
     static {
-        contractList = contractFile.readData(new File(PATH_CONTRACT));
+        contractList = (Collection<Contract>) contractFile.readData(new File(PATH_CONTRACT));
     }
 
     @Override

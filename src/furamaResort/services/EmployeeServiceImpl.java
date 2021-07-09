@@ -18,18 +18,18 @@ public class EmployeeServiceImpl extends CheckProperty implements EmployeeServic
     String[] qualification = {"Trung cấp", "Cao đẳng", "Đại học", "Sau đại học"};
     String[] positions = {"Lễ tân", "phục vụ", "chuyên viên", "giám sát", "quản lý", "giám đốc"};
     //Tạo file
-    static ReadAndWrite<Employee> employeeFile = new ReadAndWrite<>();
+    static ReadAndWrite employeeFile = new ReadAndWrite();
     static final String PATH_FILE = "D:\\module2\\src\\furamaResort\\data\\employee.csv";
     static File file = new File(PATH_FILE);
     //1. khởi tạo list Employee: rỗng
     static Collection<Employee> employeeList = new ArrayList<>();    //sửa: List<T> --> Collection<T>
     //2. khởi tạo giá trị list từ file:
     static {
-        employeeList = employeeFile.readData(file);
+        employeeList = (Collection<Employee>) employeeFile.readData(file);
     }
 
     public static Collection<Employee> readFileData() {  //cho chạy trc tiên --> khởi tạo dữ liệu,  //sửa: List<T> --> Collection<T>
-        return employeeFile.readData(file);
+        return (Collection<Employee>) employeeFile.readData(file);
     }
 
     @Override

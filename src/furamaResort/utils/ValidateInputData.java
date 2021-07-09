@@ -98,7 +98,7 @@ public class ValidateInputData <T> {
 
     //Diện tích sử dụng: ok
     public static double area() {
-        String regex = "^([3-9]\\d+)\\.\\d{1,2}$"; //| areaGreaterThan30
+        String regex = "^(([3-9]\\d+)|([12]\\d{2,}))\\.\\d$"; //| areaGreaterThan30
         boolean check = false;
         double area = 0;
         while (!check) {
