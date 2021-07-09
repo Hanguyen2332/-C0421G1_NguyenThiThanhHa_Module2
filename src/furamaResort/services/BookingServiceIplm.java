@@ -25,10 +25,10 @@ public class BookingServiceIplm extends CheckProperty implements BookingService 
     private static ReadAndWrite bookingNeedContractFile = new ReadAndWrite();
     private static final String PATH_WAITING_CONTRACT = "src\\furamaResort\\data\\bookingWaitingContract.csv";
 
-//    static {
-//        bookingSet = (TreeSet<Booking>) bookingFile.readData(new File(PATH_BOOKING));  //đọc file --> khởi tạo giá trị cho bookingSet
-//        bookingNeedContractSet = (TreeSet<Booking>) bookingNeedContractFile.readData(new File(PATH_WAITING_CONTRACT));
-//    }
+    static {
+        bookingSet = (TreeSet<Booking>) bookingFile.readData(new File(PATH_BOOKING));  //đọc file --> khởi tạo giá trị cho bookingSet
+        bookingNeedContractSet = (TreeSet<Booking>) bookingNeedContractFile.readData(new File(PATH_WAITING_CONTRACT));
+    }
 
     @Override
     public void display() { //ok
