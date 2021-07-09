@@ -1,6 +1,7 @@
 package furamaResort.models;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public abstract class Facility implements Serializable {
     private String serviceCode;
@@ -58,6 +59,19 @@ public abstract class Facility implements Serializable {
 
     public void setRentalType(String rentalType) {
         this.rentalType = rentalType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Facility facility = (Facility) o;
+        return serviceCode.equals(facility.serviceCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(serviceCode);
     }
 
     @Override

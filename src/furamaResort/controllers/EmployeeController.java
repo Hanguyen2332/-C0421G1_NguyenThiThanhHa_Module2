@@ -12,9 +12,9 @@ public class EmployeeController {
     public static void employeeMiniController() {
         EmployeeServiceImpl employee = new EmployeeServiceImpl();
         while (true) {
-            System.out.println("1. Display list employee\n" +
-                "2. Add new employee\n" +
-                "3. Edit new employee\n" +
+            System.out.println("1. Display list employee.csv\n" +
+                "2. Add new employee.csv\n" +
+                "3. Edit new employee.csv\n" +
                 "4. Return main menu\n" +
                 "Please enter your choice:");
             int case_choice1 = CheckValid.checkIntException();

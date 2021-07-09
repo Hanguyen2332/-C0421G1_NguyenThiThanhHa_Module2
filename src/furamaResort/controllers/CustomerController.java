@@ -10,23 +10,23 @@ public class CustomerController {
     public static void customerMenu () {
         CustomerServiceImpl customer = new CustomerServiceImpl();
         while (true) {
-            System.out.println("1. Display list customer\n" +
-                    "2. Add new customer\n" +
-                    "3. Edit new customer\n" +
+            System.out.println("1. Display list customer.csv\n" +
+                    "2. Add new customer.csv\n" +
+                    "3. Edit new customer.csv\n" +
                     "4. Return main menu\n" +
                     "Please enter your choice:");
             int case_choice2 = CheckValid.checkIntException();
             switch (case_choice2) {
                 case 1:
-                    //goi ham DISPLAY customer: OK
+                    //goi ham DISPLAY customer.csv: OK
                     customer.display();
                     break;
                 case 2:
-                    //goi ham ADD thi customer: ok
+                    //goi ham ADD thi customer.csv: ok
                     customer.addNew();
                     break;
                 case 3:
-                    //goi ham EDIT thi customer: ok
+                    //goi ham EDIT thi customer.csv: ok
                     customer.edit();
                     break;
                 case 4:

@@ -1,5 +1,6 @@
 package furamaResort.controllers;
 
+import furamaResort.controllers.facilityController.FacilityController;
 import furamaResort.libs.CheckValid;
 
 import java.util.Scanner;

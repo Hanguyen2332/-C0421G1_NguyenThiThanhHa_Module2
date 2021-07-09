@@ -19,7 +19,7 @@ public class EmployeeServiceImpl extends CheckProperty implements EmployeeServic
     String[] positions = {"Lễ tân", "phục vụ", "chuyên viên", "giám sát", "quản lý", "giám đốc"};
     //Tạo file
     static ReadAndWrite<Employee> employeeFile = new ReadAndWrite<>();
-    static final String PATH_FILE = "D:\\module2\\src\\furamaResort\\data\\employee";
+    static final String PATH_FILE = "D:\\module2\\src\\furamaResort\\data\\employee.csv";
     static File file = new File(PATH_FILE);
     //1. khởi tạo list Employee: rỗng
     static Collection<Employee> employeeList = new ArrayList<>();    //sửa: List<T> --> Collection<T>
@@ -45,8 +45,8 @@ public class EmployeeServiceImpl extends CheckProperty implements EmployeeServic
 
     @Override
     public void addNew() {  // đã update: thêm mới vào file IO  -ok
-        String id = QuickInOut.inputOutput("Enter employee code : ");
-        String name = QuickInOut.inputOutput("Enter employee's full name: ");
+        String id = QuickInOut.inputOutput("Enter employee.csv code : ");
+        String name = QuickInOut.inputOutput("Enter employee.csv's full name: ");
         String dateOfBirth = ValidateInputData.dateOfBirth();
         String gender = QuickInOut.inputOutput("Enter gender: ");
         String idNumber = QuickInOut.inputOutput("Enter ID Number: ");
@@ -70,7 +70,7 @@ public class EmployeeServiceImpl extends CheckProperty implements EmployeeServic
     public void edit() {   //ok - update: try/catch, cho loop --> nhập id + choice đến khi đúng
         boolean check = false;
         while (!check) {
-            String employeeNumber = QuickInOut.inputOutput("Please enter employee's ID : ");
+            String employeeNumber = QuickInOut.inputOutput("Please enter employee.csv's ID : ");
             //lấy data từ file
             for (Employee employee : employeeList) {
                 if (employeeNumber.equals(employee.getCode())) {
@@ -91,7 +91,7 @@ public class EmployeeServiceImpl extends CheckProperty implements EmployeeServic
                 }
             }
             if (!check) {
-                System.err.println("NOT found this employee-number! Please try again");
+                System.err.println("NOT found this employee.csv-number! Please try again");
             }
         }
     }

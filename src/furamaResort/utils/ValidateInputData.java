@@ -2,7 +2,6 @@ package furamaResort.utils;
 
 import furamaResort.libs.CheckValid;
 import furamaResort.libs.QuickInOut;
-import furamaResort.models.Villa;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -24,13 +23,12 @@ public class ValidateInputData <T> {
         boolean check = false;
         String villaCode = null;
         while (!check) {
-            villaCode = QuickInOut.inputOutput("Enter villa service code: ");
+            villaCode = QuickInOut.inputOutput("Enter VILLA CODE accoding to format: 'SVVL-XXXX', where X is a number from 0-9 ");
 
             if (Pattern.matches(regex, villaCode)) {
                 check = true;
-                System.out.println("ok");
             } else {
-                System.err.println("Villa code must be in the format: 'SVVL-XXXX', where X is a number from 0-9");
+                System.err.println("Wrong format! please enter again: ");
             }
         }
         return villaCode;
@@ -41,12 +39,11 @@ public class ValidateInputData <T> {
         boolean check = false;
         String houseCode = null;
         while (!check) {
-            houseCode = QuickInOut.inputOutput("Enter house code: ");
+            houseCode = QuickInOut.inputOutput("Enter HOUSE CODE accoding to format: 'SVHO-XXXX', where X is a number from 0-9 ");
             if (Pattern.matches(regex, houseCode)) {
                 check = true;
-                System.out.println("ok");
             } else {
-                System.err.println("House code must be in the format: 'SVHO-XXXX', where X is a number from 0-9");
+                System.err.println("Wrong format! please enter again: ");
             }
         }
         return houseCode;
@@ -57,28 +54,43 @@ public class ValidateInputData <T> {
         boolean check = false;
         String roomCode = null;
         while (!check) {
-            roomCode = QuickInOut.inputOutput("Enter room code: ");
+            roomCode = QuickInOut.inputOutput("Enter ROOM CODE accoding to format: 'SVRO-XXXX', where X is a number from 0-9 ");
             if (Pattern.matches(regex, roomCode)) {
                 check = true;
                 System.out.println("ok");
             } else {
-                System.err.println("Room code must be in the format: 'SVRO-XXXX', where X is a number from 0-9");
+                System.err.println("Wrong format! please enter again: ");
             }
         }
-        return roomCode;
+        return roomCode;  //ok
     }
     //mã Contract
+    public static String bookingCode() {
+        String regex = "^BK-\\d{4,6}$";
+        String bookingCode = null;
+        boolean check =  false;
+        while (!check) {
+            bookingCode = QuickInOut.inputOutput("Enter BOOKING CODE accoding to format: 'BK-XXXX', where X is a number from 0-9 ");
+            if (Pattern.matches(regex,bookingCode)) {
+                check = true;
+            }else {
+                System.err.println("Wrong format! please enter again: ");
+            }
+        }
+        return bookingCode;
+    }
+
+    //mã Contract
     public static String contractCode() {
-        String regex = "^CT-\\d{4}$";
+        String regex = "^CT-\\d{4,6}$";
         String contractCode = null;
         boolean check =  false;
         while (!check) {
-            contractCode = QuickInOut.inputOutput("Enter contract code: ");
+            contractCode = QuickInOut.inputOutput("Enter CONTRACT CODE accoding to format: 'CT-XXXX', where X is a number from 0-9 ");
             if (Pattern.matches(regex,contractCode)) {
-                System.out.println("Format ok");
                 check = true;
             }else {
-                System.err.println("Villa code must be in the format: 'CT-XXXX', where X is a number from 0-9");
+                System.err.println("Wrong format! please enter again: ");
             }
         }
         return contractCode;
@@ -86,17 +98,17 @@ public class ValidateInputData <T> {
 
     //Diện tích sử dụng: ok
     public static double area() {
-        String regex = "^([1]\\d{2}\\.\\d{1,2})|([3-9][\\d]\\.\\d{1,2})$"; //areaGreaterThan100 | areaGreaterThan30
+        String regex = "^([3-9]\\d+)\\.\\d{1,2}$"; //| areaGreaterThan30
         boolean check = false;
         double area = 0;
         while (!check) {
-            System.out.println("Enter area: ");
+            System.out.println("Enter area (area >= 30m2) : ");
             area = CheckValid.checkFloatException();
             if (Pattern.matches(regex, String.valueOf(area))) {
                 check = true;
                 System.out.println("ok");
             } else {
-                System.err.println("Area must be greater than 30m2 and less than 200m2. Please enter in correct format");
+                System.err.println("Wrong format!Please enter in correct format");
             }
         }
         return area;
@@ -104,7 +116,7 @@ public class ValidateInputData <T> {
 
     //Phí thuê:  NG  : phí thuê kiểu double --> chỉ giới hạn đến số tiền hàng CHỤC triệu --> làm thế nào?
     public static double rentalFee() {
-        String regex = "^[1-9]+\\.\\d{1,3}$";
+        String regex = "^([1-9]\\d*)\\.\\d{1,3}$";
         boolean check = false;
         double fee = 0;
         while (!check) {
@@ -114,25 +126,24 @@ public class ValidateInputData <T> {
                 check = true;
                 System.out.println("ok");
             } else {
-                System.err.println("Rental fee positive number! Please enter in correct format:");
+                System.err.println("Rental fee is positive number! Please enter in correct format:");
             }
         }
         return fee;
     }
-
     //số người: ok
     public static int maxNumsPeople() {
-        String regex = "^[1-9]|([1][0-9])?$"; // 1-9 | 10-19
+        String regex = "^[1-9]|([1][0-9])|(20)$"; // 1-9 | 10-19
         boolean check = false;
         int number = 0;
-        System.out.println("Enter the maximum number of people: ");
+        System.out.println("Enter the maximum number of people (0 < people <=20): ");
         while (!check) {
             number = CheckValid.checkIntException();
             if (Pattern.matches(regex, String.valueOf(number))) {
                 check = true;
                 System.out.println("ok");
             } else {
-                System.err.println("The maximum number of people must be > 0 and <= 20. Please try again: ");
+                System.err.println("Wrong Format! Please try again: ");
             }
         }
         return number;
@@ -144,12 +155,12 @@ public class ValidateInputData <T> {
         boolean check = false;
         String villaStandard = null;
         while (!check) {
-            villaStandard = QuickInOut.inputOutput("Enter villa standard: ");
+            villaStandard = QuickInOut.inputOutput("Enter VILLA STANDARD according to the format:  'SVVL-standardName': ");
             if (Pattern.matches(regex, villaStandard)) {
                 check = true;
                 System.out.println("ok");
             } else {
-                System.err.println("Please enter villa standard according to the format:  'SVVL-standardName'");
+                System.err.println("Wrong Format! Please try again: ");
             }
         }
         return villaStandard;
@@ -160,14 +171,14 @@ public class ValidateInputData <T> {
         String regex = "^[1-5]$"; // 1-9 | 10-19
         boolean check = false;
         int numsOfFloors = 0;
-        System.out.println("Enter number of floor: ");
+        System.out.println("Enter number of floor (floor must be > 0 and <= 5): ");
         while (!check) {
             numsOfFloors = CheckValid.checkIntException();
             if (Pattern.matches(regex, String.valueOf(numsOfFloors))) {
                 check = true;
                 System.out.println("ok");
             } else {
-                System.err.println("The number of floor must be > 0 and <= 5. Please try again: ");
+                System.err.println("Wrong Format! Please try again: ");
             }
         }
         return numsOfFloors;
@@ -178,31 +189,15 @@ public class ValidateInputData <T> {
         boolean check = false;
         String houseCode = null;
         while (!check) {
-            houseCode = QuickInOut.inputOutput("Enter house standard: ");
+            houseCode = QuickInOut.inputOutput("Enter HOUSE STANDARD according to the format:  'SVHO-standardName': ");
             if (Pattern.matches(regex, houseCode)) {
                 check = true;
                 System.out.println("ok");
             } else {
-                System.err.println("Please enter house standard according to the format: 'SVHO-standardName' ");
+                System.err.println("Wrong Format! Please try again: ");
             }
         }
         return houseCode;
-    }
-
-    public static String roomStandard() {
-        String regex = "^(SVRO)-[a-zA-Z0-9 ]+$";
-        boolean check = false;
-        String roomCode = null;
-        while (!check) {
-            roomCode = QuickInOut.inputOutput("Enter room standard: ");
-            if (Pattern.matches(regex, roomCode)) {
-                check = true;
-                System.out.println("ok");
-            } else {
-                System.err.println("Please enter room standard according to the format: 'SVRO-standardName' ");
-            }
-        }
-        return roomCode;
     }
 
     public static String dateOfBirth() {  //ok
@@ -211,7 +206,7 @@ public class ValidateInputData <T> {
         boolean check = false;
         String birthDate = null;
         while (!check) {
-            birthDate = QuickInOut.inputOutput("Enter date of Birth: ");
+            birthDate = QuickInOut.inputOutput("Enter date of Birth according to format: 'dd/MM/yyy': ");
             //check format:
             if (Pattern.matches(regex, birthDate)) {
                 check = checkAge(birthDate);

@@ -18,7 +18,7 @@ public class CustomerServiceImpl implements CustomerService {
     private String[] customerType = {"Diamond", "Platinum", "Gold", "Silver", "Member"}; //tại sao biến mảng: không cần static--> vẫn gọi đc trong hàm?
     //file
     public static ReadAndWrite<Customer> customerFile = new ReadAndWrite<>();
-    private static final String PATH_CUSTOMER = "D:\\module2\\src\\furamaResort\\data\\customer";
+    private static final String PATH_CUSTOMER = "D:\\module2\\src\\furamaResort\\data\\customer.csv";
     private static File file = new File(PATH_CUSTOMER);
     //list:
     private static Collection<Customer> customerList = new LinkedList<>();  //sửa: List<T> --> Collection<T>
@@ -35,15 +35,15 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void addNew() {  //ok
-        String customerCode = QuickInOut.inputOutput("Enter employee code : ");
-        String name = QuickInOut.inputOutput("Enter employee's full name: ");
+        String customerCode = QuickInOut.inputOutput("Enter employee.csv code : ");
+        String name = QuickInOut.inputOutput("Enter employee.csv's full name: ");
         String dateOfBirth = ValidateInputData.dateOfBirth();
         String gender = QuickInOut.inputOutput("Enter gender: ");
         String idNumber = QuickInOut.inputOutput("Enter ID Number: ");
         String phone = QuickInOut.inputOutput("Enter phone number: ");
         String email = QuickInOut.inputOutput("Enter email: ");
-        //nhap customer-type:
-        System.out.println("Enter customer-type: ");
+        //nhap customer.csv-type:
+        System.out.println("Enter customer.csv-type: ");
         String type = CheckProperty.checkInputProperty(customerType); //mảng qualification: đã khai báo ở đầu class --> tái sử dụng ở hàm edit
         //address:
         String address = QuickInOut.inputOutput("Enter address: ");
@@ -57,7 +57,7 @@ public class CustomerServiceImpl implements CustomerService {
     public void edit() {
         boolean check = false;
         while (!check) {
-            String customerCode = QuickInOut.inputOutput("Please enter customer-code: ");
+            String customerCode = QuickInOut.inputOutput("Please enter customer.csv-code: ");
             for (Customer customer : customerList) {
                 if (customerCode.equals(customer.getCode())) {
                     check = true;
@@ -74,7 +74,7 @@ public class CustomerServiceImpl implements CustomerService {
                 }
             }
             if (!check) {
-                System.err.println("NOT found this employee-number! Please try again");
+                System.err.println("NOT found this employee.csv-number! Please try again");
             }
         }
     }
@@ -82,4 +82,4 @@ public class CustomerServiceImpl implements CustomerService {
          return customerList;
     }
 }
-// 5/7: sửa tên link file customer: PATH_FILE --> PATH_CUSTOMER
+// 5/7: sửa tên link file customer.csv: PATH_FILE --> PATH_CUSTOMER

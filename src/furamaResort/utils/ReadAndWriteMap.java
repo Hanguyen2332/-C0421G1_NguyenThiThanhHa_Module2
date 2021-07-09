@@ -11,7 +11,7 @@ public class ReadAndWriteMap<K,V> {
         try {
             File file = new File(path);
             if (!file.exists()) {
-                throw new FileNotFoundException();
+                file.createNewFile();
             }
             oops = new ObjectOutputStream(new FileOutputStream(file));
             oops.writeObject(list);
@@ -35,7 +35,7 @@ public class ReadAndWriteMap<K,V> {
         try {
             File file = new File(path);
             if (!file.exists()) {
-                throw new FileNotFoundException();
+               file.createNewFile();
             }
             oips = new ObjectInputStream(new FileInputStream(file));
             objectMap = (Map<K,V>) oips.readObject();

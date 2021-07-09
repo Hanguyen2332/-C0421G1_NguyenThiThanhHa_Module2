@@ -62,20 +62,20 @@ public class Booking implements Serializable {
         this.serviceName = serviceName;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Booking booking = (Booking) o;
-        return Objects.equals(bookingId, booking.bookingId) &&
-                Objects.equals(customerId, booking.customerId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(bookingId, customerId);
-    }
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Booking booking = (Booking) o;
+//        return Objects.equals(bookingId, booking.bookingId) &&
+//                Objects.equals(customerId, booking.customerId);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(bookingId, customerId);
+//    }
 
     @Override
     public String toString() {
